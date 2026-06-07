@@ -34,7 +34,27 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  animation: bodyFadeIn 0.5s ease;
 }
+
+@keyframes bodyFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+::selection {
+  background: rgba(255, 45, 123, 0.3);
+  color: white;
+}
+
+/* custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb {
+  background: rgba(124,58,237,0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(124,58,237,0.5); }
 
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }

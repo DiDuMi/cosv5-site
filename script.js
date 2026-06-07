@@ -145,7 +145,21 @@ document.addEventListener('DOMContentLoaded', () => {
       if (current > 150 && current > lastScroll) nav.classList.add('hidden');
       else nav.classList.remove('hidden');
       lastScroll = current;
-    });
+    }, { passive: true });
+  }
+
+  /* ════════════════════════ */
+  /* 2b. Hero parallax        */
+  /* ════════════════════════ */
+  const heroContent = document.querySelector('.hero-content');
+  if (heroContent) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const opacity = Math.max(0, 1 - scrolled / 500);
+      const translateY = scrolled * 0.3;
+      heroContent.style.opacity = opacity;
+      heroContent.style.transform = `translateY(${translateY}px)`;
+    }, { passive: true });
   }
 
   /* ════════════════════════ */
