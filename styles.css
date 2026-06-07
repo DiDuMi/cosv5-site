@@ -151,6 +151,27 @@ section {
   color: white !important;
   font-weight: 700 !important;
 }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.lang-toggle {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 1px;
+}
+.lang-toggle:hover {
+  border-color: var(--accent-pink);
+  color: var(--accent-pink);
+}
 .nav-toggle {
   display: none;
   background: none;

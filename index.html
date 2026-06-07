@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>COSV5 — 先锋社群</title>
-  <meta name="description" content="COSV5 - Telegram Cosplay 资源社群先锋。开创性社群，定义行业标准。">
-  <meta property="og:title" content="COSV5 — 先锋社群">
-  <meta property="og:description" content="Telegram Cosplay 资源社群先锋。第一个做资源流出、会员共享、邮箱保障的社群。">
+  <title>COSV5 — The Pioneer Community</title>
+  <meta name="description" content="COSV5 - Telegram Cosplay resource community pioneer. First to stream, share memberships, and secure benefits.">
+  <meta property="og:title" content="COSV5 — The Pioneer Community">
+  <meta property="og:description" content="Telegram Cosplay community pioneer. First in resource streaming, membership sharing, email-bound security.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="/og-image.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,16 +21,19 @@
     <div class="nav-inner">
       <span class="nav-logo">COSV5</span>
       <div class="nav-links">
-        <a href="#about">关于</a>
-        <a href="#timeline">历程</a>
-        <a href="#channels">频道</a>
-        <a href="#features">特色</a>
-        <a href="#team">团队</a>
-        <a href="#join" class="nav-cta">加入</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#timeline" data-i18n="nav.timeline">History</a>
+        <a href="#channels" data-i18n="nav.channels">Channels</a>
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#team" data-i18n="nav.team">Team</a>
+        <a href="#join" class="nav-cta" data-i18n="nav.join">Join</a>
       </div>
-      <button class="nav-toggle" id="navToggle" aria-label="菜单">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-right">
+        <button class="lang-toggle" id="langToggle" aria-label="Switch language">中文</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -39,20 +42,20 @@
     <canvas class="hero-canvas" id="particleCanvas"></canvas>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="hero-badge">#1 Telegram Cosplay 社群</div>
+      <div class="hero-badge" data-i18n="hero.badge">#1 Telegram Cosplay Community</div>
       <h1 class="hero-title">
         <span class="hero-title-line">COS</span>
         <span class="hero-title-line accent">V5</span>
       </h1>
-      <p class="hero-sub">不止是资源。是开创。</p>
-      <p class="hero-desc">Telegram Cosplay 生态的开荒者——<br>定义规则的人，而不是跟随规则的人。</p>
+      <p class="hero-sub" data-i18n="hero.sub">More than resources. It's pioneering.</p>
+      <p class="hero-desc" data-i18n="hero.desc">The trailblazer of Telegram's Cosplay ecosystem —<br>the one who defines the rules, not follows them.</p>
       <div class="hero-actions">
-        <a href="#about" class="btn btn-primary">了解我们 →</a>
-        <a href="#join" class="btn btn-secondary">加入社群</a>
+        <a href="#about" class="btn btn-primary" data-i18n="hero.cta1">Explore →</a>
+        <a href="#join" class="btn btn-secondary" data-i18n="hero.cta2">Join Us</a>
       </div>
     </div>
     <div class="hero-scroll-indicator">
-      <span>滚动探索</span>
+      <span data-i18n="hero.scroll">Scroll to explore</span>
       <div class="scroll-arrow"></div>
     </div>
   </section>
@@ -62,32 +65,32 @@
     <div class="section-bg-glow left"></div>
     <div class="container">
       <div class="section-label reveal">ABOUT</div>
-      <h2 class="section-title reveal">先锋的诞生</h2>
-      <p class="section-desc reveal">
-        COSV5 是 Telegram 生态中最早专注于 Cosplay 资源分发的社群之一。
-        从零开始，我们开创了多个行业第一——不模仿，只创造。
+      <h2 class="section-title reveal" data-i18n="about.title">The Pioneer</h2>
+      <p class="section-desc reveal" data-i18n="about.desc">
+        COSV5 is one of the earliest Telegram communities dedicated to Cosplay resource distribution.
+        Starting from zero, we pioneered multiple industry firsts — we don't imitate, we create.
       </p>
 
       <div class="stats-grid reveal">
         <div class="stat-card">
           <span class="stat-number" data-target="4800">0</span>
           <span class="stat-suffix">+</span>
-          <span class="stat-label">社群成员</span>
+          <span class="stat-label" data-i18n="stats.members">Community Members</span>
         </div>
         <div class="stat-card">
           <span class="stat-number" data-target="5000">0</span>
           <span class="stat-suffix">+</span>
-          <span class="stat-label">资源发布</span>
+          <span class="stat-label" data-i18n="stats.resources">Resources Shared</span>
         </div>
         <div class="stat-card">
           <span class="stat-number" data-from-date="2024-05-01">0</span>
-          <span class="stat-suffix">天</span>
-          <span class="stat-label">持续运营</span>
+          <span class="stat-suffix" data-i18n="stats.daysSuffix">days</span>
+          <span class="stat-label" data-i18n="stats.days">Active Operation</span>
         </div>
         <div class="stat-card">
           <span class="stat-number" data-target="5">0</span>
-          <span class="stat-suffix">项</span>
-          <span class="stat-label">行业首创</span>
+          <span class="stat-suffix"></span>
+          <span class="stat-label" data-i18n="stats.firsts">Industry Firsts</span>
         </div>
       </div>
     </div>
@@ -97,7 +100,7 @@
   <section class="philosophy" id="philosophy">
     <div class="container">
       <div class="section-label reveal">PHILOSOPHY</div>
-      <h2 class="section-title reveal">我们的理念</h2>
+      <h2 class="section-title reveal" data-i18n="philosophy.title">Our Philosophy</h2>
       <div class="philosophy-quotes reveal">
         <div class="philosophy-card">
           <span class="philosophy-icon">👁️</span>
@@ -122,16 +125,14 @@
   <section class="timeline" id="timeline">
     <div class="container">
       <div class="section-label reveal">HISTORY</div>
-      <h2 class="section-title reveal">发展历程</h2>
-      <p class="section-desc reveal">每一步都在改写规则。</p>
+      <h2 class="section-title reveal" data-i18n="timeline.title">Our Journey</h2>
+      <p class="section-desc reveal" data-i18n="timeline.desc">Every step rewrites the rules.</p>
 
-      <div class="timeline-track" id="timelineTrack">
-        <!-- JS will populate timeline items -->
-      </div>
+      <div class="timeline-track" id="timelineTrack"></div>
       <div class="timeline-controls reveal">
-        <button class="tl-btn" id="tlPrev" aria-label="上一个">‹</button>
+        <button class="tl-btn" id="tlPrev" aria-label="Previous">‹</button>
         <div class="tl-dots" id="tlDots"></div>
-        <button class="tl-btn" id="tlNext" aria-label="下一个">›</button>
+        <button class="tl-btn" id="tlNext" aria-label="Next">›</button>
       </div>
     </div>
   </section>
@@ -141,41 +142,41 @@
     <div class="section-bg-glow right"></div>
     <div class="container">
       <div class="section-label reveal">CHANNELS</div>
-      <h2 class="section-title reveal">频道矩阵</h2>
-      <p class="section-desc reveal">覆盖全网的 Cosplay 资源分发网络。</p>
+      <h2 class="section-title reveal" data-i18n="channels.title">Channel Network</h2>
+      <p class="section-desc reveal" data-i18n="channels.desc">A Cosplay resource distribution network across Telegram.</p>
 
       <div class="channel-grid reveal">
         <a class="channel-card" href="https://t.me/COSV5_COM" target="_blank" rel="noopener">
           <div class="channel-card-glow"></div>
           <div class="channel-card-icon">🎯</div>
           <h3>COSV5_COM</h3>
-          <p>先锋版本 · 流出内容优先发布</p>
+          <p data-i18n="channels.com.desc">Pioneer · Premier releases first</p>
           <span class="channel-sub-count" data-target="6947">0</span>
-          <span class="channel-sub-label">订阅</span>
+          <span class="channel-sub-label" data-i18n="channels.sub">subscribers</span>
         </a>
         <a class="channel-card" href="https://t.me/COSV5_VIP" target="_blank" rel="noopener">
           <div class="channel-card-glow"></div>
           <div class="channel-card-icon">💎</div>
           <h3>COSV5_VIP</h3>
-          <p>精选内容 · 高品质合集</p>
+          <p data-i18n="channels.vip.desc">Curated · Premium collections</p>
           <span class="channel-sub-count" data-target="2500">0</span>
-          <span class="channel-sub-label">订阅</span>
+          <span class="channel-sub-label" data-i18n="channels.sub">subscribers</span>
         </a>
         <a class="channel-card" href="https://t.me/COSV5FR" target="_blank" rel="noopener">
           <div class="channel-card-glow"></div>
           <div class="channel-card-icon">🌍</div>
           <h3>COSV5FR</h3>
-          <p>国际版 · 法语 &amp; 全球化</p>
+          <p data-i18n="channels.fr.desc">International · French &amp; global</p>
           <span class="channel-sub-count" data-target="2200">0</span>
-          <span class="channel-sub-label">订阅</span>
+          <span class="channel-sub-label" data-i18n="channels.sub">subscribers</span>
         </a>
         <a class="channel-card" href="https://t.me/CoserGD" target="_blank" rel="noopener">
           <div class="channel-card-glow"></div>
           <div class="channel-card-icon">🎭</div>
           <h3>CoserGD</h3>
-          <p>优质 Coser 资源合作频道</p>
+          <p data-i18n="channels.gd.desc">Premium Coser collaboration</p>
           <span class="channel-sub-count" data-target="5000">0</span>
-          <span class="channel-sub-label">订阅</span>
+          <span class="channel-sub-label" data-i18n="channels.sub">subscribers</span>
         </a>
       </div>
     </div>
@@ -185,34 +186,34 @@
   <section class="features" id="features">
     <div class="container">
       <div class="section-label reveal">PIONEERING</div>
-      <h2 class="section-title reveal">行业首创</h2>
-      <p class="section-desc reveal">不是第一家，是第一家做到这些的。</p>
+      <h2 class="section-title reveal" data-i18n="features.title">Industry Firsts</h2>
+      <p class="section-desc reveal" data-i18n="features.desc">Not the first — the first to do it right.</p>
 
       <div class="features-grid reveal">
         <div class="feature-card">
           <div class="feature-icon">🔓</div>
-          <h3>资源流出</h3>
-          <p>Telegram 首个专注于 Cosplay 资源流出的频道，开创全新内容分发模式。</p>
+          <h3 data-i18n="features.f1.title">Resource Streaming</h3>
+          <p data-i18n="features.f1.desc">The first Telegram channel dedicated to Cosplay resource streaming, creating a new distribution model.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🔗</div>
-          <h3>会员共享</h3>
-          <p>首家实现 Cosplay 资源网站会员账号共享，降低门槛、普惠社群。</p>
+          <h3 data-i18n="features.f2.title">Membership Sharing</h3>
+          <p data-i18n="features.f2.desc">First to share Cosplay site membership accounts, lowering barriers for the community.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">📧</div>
-          <h3>邮箱绑定</h3>
-          <p>最早为付费成员提供邮箱绑定保障权益的社群，安全与信任先行。</p>
+          <h3 data-i18n="features.f3.title">Email-Bound Security</h3>
+          <p data-i18n="features.f3.desc">First to offer email-bound membership protection, prioritizing safety and trust.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🎴</div>
-          <h3>许愿卡</h3>
-          <p>首创积分兑换许愿卡机制，让每个成员的声音都能被听到。</p>
+          <h3 data-i18n="features.f4.title">Wish Cards</h3>
+          <p data-i18n="features.f4.desc">Pioneered a points-based wish card system — every member's voice gets heard.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon">🤝</div>
-          <h3>拼团回血</h3>
-          <p>创新拼团与资源回血模式，让社群生态自循环、可持续。</p>
+          <h3 data-i18n="features.f5.title">Group Buy &amp; Resell</h3>
+          <p data-i18n="features.f5.desc">Innovative group-buy and resource-resell model for a self-sustaining ecosystem.</p>
         </div>
       </div>
     </div>
@@ -223,20 +224,20 @@
     <div class="section-bg-glow left"></div>
     <div class="container">
       <div class="section-label reveal">TEAM</div>
-      <h2 class="section-title reveal">核心团队</h2>
-      <p class="section-desc reveal">一群把想法变成现实的人。</p>
+      <h2 class="section-title reveal" data-i18n="team.title">Core Team</h2>
+      <p class="section-desc reveal" data-i18n="team.desc">The people who turn ideas into reality.</p>
 
       <div class="team-grid reveal">
         <div class="team-card">
           <div class="team-avatar" style="--avatar-bg: #ff2d55;">D</div>
-          <h3>低毒</h3>
-          <span class="team-role">创始人 · 运营</span>
-          <p>社群构想的提出者和执行者。从零到一的推动力。</p>
+          <h3 data-i18n="team.m1.name">DiDu</h3>
+          <span class="team-role" data-i18n="team.m1.role">Founder · Operations</span>
+          <p data-i18n="team.m1.desc">Visionary and executor. The driving force from zero to one.</p>
         </div>
         <div class="team-card">
           <div class="team-avatar" style="--avatar-bg: #5856d6;">小z</div>
-          <span class="team-role">AI 工程师</span>
-          <p>自动化、数据分析、技术基建的幕后支撑。</p>
+          <span class="team-role" data-i18n="team.m2.role">AI Engineer</span>
+          <p data-i18n="team.m2.desc">Automation, data analysis, and tech infrastructure behind the scenes.</p>
         </div>
       </div>
     </div>
@@ -246,18 +247,18 @@
   <section class="join" id="join">
     <div class="container">
       <div class="join-content reveal">
-        <h2>加入 COSV5</h2>
-        <p>成为先锋社群的一员，<br>第一时间获取最优质的 Cosplay 资源。</p>
+        <h2 data-i18n="join.title">Join COSV5</h2>
+        <p data-i18n="join.desc">Become a member of the pioneer community<br>and get the finest Cosplay resources第一时间.</p>
         <div class="join-actions">
           <a class="btn btn-primary btn-lg" href="https://t.me/COSV5_COM" target="_blank" rel="noopener">
-            📢 订阅频道
+            📢 <span data-i18n="join.btn1">Subscribe</span>
           </a>
           <a class="btn btn-secondary btn-lg" href="https://t.me/cosv5" target="_blank" rel="noopener">
-            💬 加入群聊
+            💬 <span data-i18n="join.btn2">Join Chat</span>
           </a>
         </div>
         <div class="join-links">
-          <a href="https://t.me/V5joinBot" target="_blank" rel="noopener">@V5joinBot — 付费加入</a>
+          <a href="https://t.me/V5joinBot" target="_blank" rel="noopener">@V5joinBot <span data-i18n="join.bot">— Paid Membership</span></a>
         </div>
       </div>
     </div>
@@ -269,7 +270,7 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <span class="footer-logo">COSV5</span>
-          <p>Telegram Cosplay 社群先锋</p>
+          <p data-i18n="footer.tagline">Telegram Cosplay Community Pioneer</p>
         </div>
         <div class="footer-links">
           <a href="https://t.me/COSV5_COM" target="_blank" rel="noopener">@COSV5_COM</a>
@@ -283,6 +284,7 @@
     </div>
   </footer>
 
+  <script src="i18n.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

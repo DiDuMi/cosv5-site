@@ -1,6 +1,54 @@
 /* ─── Site JavaScript ─── */
 
+/* ════════════════════════ */
+/* Timeline (global for i18n) */
+/* ════════════════════════ */
+function renderTimeline() {
+  const track = document.getElementById('timelineTrack');
+  if (!track) return;
+  const dots = document.getElementById('tlDots');
+
+  const data = (I18N[currentLang] || I18N.en).timeline.items;
+
+  // Clear and rebuild
+  track.innerHTML = '';
+  if (dots) dots.innerHTML = '';
+
+  data.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'timeline-item' + (i === 0 ? ' active' : '');
+    div.innerHTML = `
+      <div class="tl-year">${item.year}</div>
+      <div class="tl-month">${item.month}</div>
+      <div class="tl-title">${item.title}</div>
+      <div class="tl-desc">${item.desc}</div>
+    `;
+    track.appendChild(div);
+
+    if (dots) {
+      const dot = document.createElement('span');
+      dot.className = 'tl-dot' + (i === 0 ? ' active' : '');
+      dot.dataset.index = i;
+      dot.addEventListener('click', () => goToSlide(i));
+      dots.appendChild(dot);
+    }
+  });
+
+  currentSlide = 0;
+  isScrolling = false;
+}
+
+/* ─── DOM Ready ─── */
 document.addEventListener('DOMContentLoaded', () => {
+
+  /* ════════════════════════ */
+  /* 0. Render i18n text      */
+  /* ════════════════════════ */
+  renderText();
+
+  /* Lang toggle */
+  const langToggle = document.getElementById('langToggle');
+  if (langToggle) langToggle.addEventListener('click', toggleLang);
 
   /* ════════════════════════ */
   /* 1. Particle Canvas       */
@@ -11,11 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let particles = [];
     let w, h;
     const COLORS = ['rgba(255,45,123,', 'rgba(124,58,237,', 'rgba(34,211,238,'];
+    let mouseX = -1000, mouseY = -1000;
 
-    function resize() {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-    }
+    function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
     window.addEventListener('resize', resize);
     resize();
 
@@ -50,16 +96,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const PARTICLE_COUNT = Math.min(80, Math.floor((w * h) / 15000));
     for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
 
-    let mouseX = -1000, mouseY = -1000;
     window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
 
     function animateParticles() {
       ctx.clearRect(0, 0, w, h);
-      for (let p of particles) {
-        p.update();
-        p.draw();
-      }
-      // connections
+      for (let p of particles) { p.update(); p.draw(); }
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -75,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
       }
-      // mouse connect
       for (let p of particles) {
         const dx = p.x - mouseX;
         const dy = p.y - mouseY;
@@ -111,15 +151,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ════════════════════════ */
   /* 3. Mobile Toggle         */
   /* ════════════════════════ */
-  const toggle = document.getElementById('navToggle');
-  const links = document.querySelector('.nav-links');
-  if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      links.classList.toggle('open');
-    });
-    links.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => links.classList.remove('open'));
-    });
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
   }
 
   /* ════════════════════════ */
@@ -129,10 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (revealEls.length) {
     const observer = new IntersectionObserver((entries) => {
       for (let entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
       }
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     revealEls.forEach(el => observer.observe(el));
@@ -141,14 +174,26 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ════════════════════════ */
   /* 5. Stat Counters         */
   /* ════════════════════════ */
-  const statNumbers = document.querySelectorAll('.stat-number');
-  if (statNumbers.length) {
-    const counterObserver = new IntersectionObserver((entries) => {
+  function animateCounter(el, target) {
+    const duration = 2000, steps = 60;
+    const increment = target / steps;
+    let step = 0;
+    const timer = setInterval(() => {
+      step++;
+      const current = Math.min(Math.round(increment * step), target);
+      el.textContent = target > 1000 ? current.toLocaleString() : current;
+      if (step >= steps) { el.textContent = target > 1000 ? target.toLocaleString() : target; clearInterval(timer); }
+    }, duration / steps);
+  }
+
+  function observeCounters(selector) {
+    const els = document.querySelectorAll(selector);
+    if (!els.length) return;
+    const observer = new IntersectionObserver((entries) => {
       for (let entry of entries) {
         if (entry.isIntersecting) {
           const el = entry.target;
           if (el.dataset.fromDate) {
-            // calculate days since founding date
             const from = new Date(el.dataset.fromDate);
             const now = new Date();
             const diff = Math.floor((now - from) / (1000 * 60 * 60 * 24));
@@ -157,135 +202,64 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = parseInt(el.dataset.target) || 0;
             animateCounter(el, target);
           }
-          counterObserver.unobserve(el);
+          observer.unobserve(el);
         }
       }
     }, { threshold: 0.5 });
-    statNumbers.forEach(el => counterObserver.observe(el));
+    els.forEach(el => observer.observe(el));
   }
-
-  // channel sub counts
-  const channelCounts = document.querySelectorAll('.channel-sub-count');
-  if (channelCounts.length) {
-    const channelObserver = new IntersectionObserver((entries) => {
-      for (let entry of entries) {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          const target = parseInt(el.dataset.target) || 0;
-          animateCounter(el, target);
-          channelObserver.unobserve(el);
-        }
-      }
-    }, { threshold: 0.3 });
-    channelCounts.forEach(el => channelObserver.observe(el));
-  }
-
-  function animateCounter(el, target) {
-    const duration = 2000;
-    const steps = 60;
-    const increment = target / steps;
-    let current = 0;
-    let step = 0;
-    const timer = setInterval(() => {
-      step++;
-      current = Math.min(Math.round(increment * step), target);
-      if (target > 1000) {
-        el.textContent = current.toLocaleString();
-      } else {
-        el.textContent = current;
-      }
-      if (step >= steps) {
-        el.textContent = target > 1000 ? target.toLocaleString() : target;
-        clearInterval(timer);
-      }
-    }, duration / steps);
-  }
+  observeCounters('.stat-number');
+  observeCounters('.channel-sub-count');
 
   /* ════════════════════════ */
-  /* 6. Timeline              */
+  /* 6. Timeline Controls     */
   /* ════════════════════════ */
-  const timelineData = [
-    { year: '2024', month: '5月', title: '社群成立', desc: '2024年5月1日，COSV5 社群正式成立，低毒开启 Telegram Cosplay 资源分发之路。' },
-    { year: '2024', month: 'Q3', title: '初具规模', desc: '首批种子用户加入，频道矩阵雏形初现。' },
-    { year: '2025', month: 'Q1', title: '矩阵扩张', desc: '频道矩阵快速扩张，订阅突破 1000，开始探索会员共享模式。' },
-    { year: '2025', month: 'Q3', title: '行业首创', desc: '推出邮箱绑定、许愿卡等开创性功能，重新定义社群服务标准。' },
-    { year: '2026', month: 'Q1', title: '高速增长', desc: '@COSV5_COM 订阅突破 5000，每日曝光达限 10万+。影响力持续扩大。' },
-    { year: '2026', month: 'Q2', title: '技术升级', desc: '引入 TG-Hamster 自动采集系统，实现全链路数据化运营。' },
-    { year: '2026', month: '未来', title: '持续进化', desc: '全球化布局、更多创新功能、更完善的社群生态——敬请期待。' },
-  ];
-
   const track = document.getElementById('timelineTrack');
-  const dots = document.getElementById('tlDots');
   const prevBtn = document.getElementById('tlPrev');
   const nextBtn = document.getElementById('tlNext');
+  let currentSlide = 0;
+  let isScrolling = false;
 
-  if (track) {
-    timelineData.forEach((item, i) => {
-      const div = document.createElement('div');
-      div.className = 'timeline-item' + (i === 0 ? ' active' : '');
-      div.innerHTML = `
-        <div class="tl-year">${item.year}</div>
-        <div class="tl-month">${item.month}</div>
-        <div class="tl-title">${item.title}</div>
-        <div class="tl-desc">${item.desc}</div>
-      `;
-      track.appendChild(div);
-    });
-
-    // dots
-    if (dots) {
-      timelineData.forEach((_, i) => {
-        const dot = document.createElement('span');
-        dot.className = 'tl-dot' + (i === 0 ? ' active' : '');
-        dot.dataset.index = i;
-        dot.addEventListener('click', () => goToSlide(i));
-        dots.appendChild(dot);
-      });
+  window.goToSlide = function(index) {
+    const items = track.querySelectorAll('.timeline-item');
+    const dots = document.querySelectorAll('.tl-dot');
+    if (!items.length) return;
+    index = Math.max(0, Math.min(index, items.length - 1));
+    if (index === currentSlide) return;
+    currentSlide = index;
+    isScrolling = true;
+    items.forEach((el, i) => el.classList.toggle('active', i === currentSlide));
+    if (dots) dots.forEach((el, i) => el.classList.toggle('active', i === currentSlide));
+    const item = items[currentSlide];
+    if (item) {
+      const scrollTo = item.offsetLeft - (track.clientWidth - item.offsetWidth) / 2;
+      track.scrollTo({ left: scrollTo, behavior: 'smooth' });
     }
+    setTimeout(() => { isScrolling = false; }, 400);
+  };
 
-    let currentSlide = 0;
-    let isScrolling = false;
+  if (track && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => window.goToSlide(currentSlide - 1));
+    nextBtn.addEventListener('click', () => window.goToSlide(currentSlide + 1));
 
-    function goToSlide(index) {
-      index = Math.max(0, Math.min(index, timelineData.length - 1));
-      if (index === currentSlide) return;
-      currentSlide = index;
-      isScrolling = true;
-      const items = track.querySelectorAll('.timeline-item');
-      const dots = document.querySelectorAll('.tl-dot');
-      items.forEach((el, i) => el.classList.toggle('active', i === currentSlide));
-      if (dots) dots.forEach((el, i) => el.classList.toggle('active', i === currentSlide));
-      const item = items[currentSlide];
-      if (item) {
-        const scrollTo = item.offsetLeft - (track.clientWidth - item.offsetWidth) / 2;
-        track.scrollTo({ left: scrollTo, behavior: 'smooth' });
-      }
-      setTimeout(() => { isScrolling = false; }, 400);
-    }
-
-    if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
-
-    // scroll sync — debounced, skip during programmatic scroll
     let scrollTimer = null;
     track.addEventListener('scroll', () => {
       if (isScrolling) return;
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(() => {
         const items = track.querySelectorAll('.timeline-item');
-        let closest = 0;
-        let closestDist = Infinity;
+        const dots = document.querySelectorAll('.tl-dot');
+        if (!items.length) return;
+        let closest = 0, closestDist = Infinity;
         const trackRect = track.getBoundingClientRect();
         const center = trackRect.left + trackRect.width / 2;
         items.forEach((el, i) => {
           const rect = el.getBoundingClientRect();
-          const elCenter = rect.left + rect.width / 2;
-          const dist = Math.abs(elCenter - center);
+          const dist = Math.abs(rect.left + rect.width / 2 - center);
           if (dist < closestDist) { closestDist = dist; closest = i; }
         });
         if (closest !== currentSlide) {
           currentSlide = closest;
-          const dots = document.querySelectorAll('.tl-dot');
           items.forEach((el, i) => el.classList.toggle('active', i === closest));
           if (dots) dots.forEach((el, i) => el.classList.toggle('active', i === closest));
         }
@@ -302,9 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (href === '#') return;
       e.preventDefault();
       const target = document.querySelector(href);
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
