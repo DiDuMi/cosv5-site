@@ -25,7 +25,9 @@
         <a href="#timeline" data-i18n="nav.timeline">History</a>
         <a href="#channels" data-i18n="nav.channels">Channels</a>
         <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#tools" data-i18n="nav.tools">Tools</a>
         <a href="#team" data-i18n="nav.team">Team</a>
+        <a href="#password" data-i18n="nav.password">Password</a>
         <a href="#join" class="nav-cta" data-i18n="nav.join">Join</a>
       </div>
       <div class="nav-right">
@@ -219,6 +221,63 @@
     </div>
   </section>
 
+  <!-- ─── TOOLS ─── -->
+  <section class="tools" id="tools">
+    <div class="section-bg-glow right"></div>
+    <div class="container">
+      <div class="section-label reveal">TOOLS</div>
+      <h2 class="section-title reveal" data-i18n="tools.title">Exclusive Tools</h2>
+      <p class="section-desc reveal" data-i18n="tools.desc">Utility tools for the community, always improving.</p>
+
+      <div class="tools-feature reveal">
+        <div class="tools-feature-header">
+          <span class="tools-feature-icon">🛠️</span>
+          <h3 data-i18n="tools.exif.title">ExifCleaner (COSV5 Enhanced)</h3>
+        </div>
+        <p data-i18n="tools.exif.desc">Thank you for your support! We've enhanced the original ExifCleaner to better serve the community. If you encounter any issues, feel free to give feedback.</p>
+        <div class="tools-compare">
+          <div class="tools-col">
+            <h4 data-i18n="tools.exif.limits_title">Original Limits</h4>
+            <ul>
+              <li data-i18n="tools.exif.limit1">Cannot clean metadata from read-only files</li>
+              <li data-i18n="tools.exif.limit2">Cannot process subdirectory metadata</li>
+            </ul>
+          </div>
+          <div class="tools-col highlight">
+            <h4 data-i18n="tools.exif.enhancements_title">COSV5 Enhancements</h4>
+            <ul>
+              <li data-i18n="tools.exif.enh1">Supports read-only file metadata cleaning</li>
+              <li data-i18n="tools.exif.enh2">Recursive subdirectory cleaning</li>
+              <li data-i18n="tools.exif.enh3">Custom EXIF metadata editing</li>
+              <li data-i18n="tools.exif.enh4">Batch file renaming</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tools-bots reveal">
+        <div class="tool-bot-card">
+          <div class="tool-bot-icon">🔍</div>
+          <h3 data-i18n="tools.bot1.title">PaPulse Search &amp; Monitor</h3>
+          <p data-i18n="tools.bot1.desc">Free reverse image search and community resource search. Members can search site resources; group admins can fetch on your behalf.</p>
+          <a href="https://t.me/PaPulseBot" target="_blank" rel="noopener" class="tool-bot-link">@PaPulseBot</a>
+        </div>
+        <div class="tool-bot-card">
+          <div class="tool-bot-icon">🕸️</div>
+          <h3 data-i18n="tools.bot2.title">V5Mesh Distribution</h3>
+          <p data-i18n="tools.bot2.desc">Solve channel ops pain points: ban risk, content duplication, low曝光, matrix inefficiency. Clone your own distribution bot — sync to multiple channels with AI-optimized copy.</p>
+          <a href="https://t.me/V5MeshBot" target="_blank" rel="noopener" class="tool-bot-link">@V5MeshBot</a>
+        </div>
+        <div class="tool-bot-card">
+          <div class="tool-bot-icon">⭐</div>
+          <h3 data-i18n="tools.bot3.title">GuiYaoBot Check-in &amp; Points</h3>
+          <p data-i18n="tools.bot3.desc">Earn points, bind email, restore membership rights. Protect your community benefits against Telegram-related risks.</p>
+          <a href="https://t.me/GuiYaoBot" target="_blank" rel="noopener" class="tool-bot-link">@GuiYaoBot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─── TEAM ─── -->
   <section class="team" id="team">
     <div class="section-bg-glow left"></div>
@@ -238,6 +297,41 @@
           <div class="team-avatar" style="--avatar-bg: #5856d6;">小z</div>
           <span class="team-role" data-i18n="team.m2.role">AI Engineer</span>
           <p data-i18n="team.m2.desc">Automation, data analysis, and tech infrastructure behind the scenes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PASSWORD ─── -->
+  <section class="password-section" id="password">
+    <div class="container">
+      <div class="section-label reveal">PASSWORD</div>
+      <h2 class="section-title reveal" data-i18n="password.title">Universal Password</h2>
+      <p class="section-desc reveal" data-i18n="password.desc">One password for all archives. Click to copy.</p>
+
+      <div class="password-card reveal">
+        <div class="password-display" id="passwordDisplay">
+          <span class="password-lock">🔒</span>
+          <span class="password-text" id="passwordText">COSV5.VIP</span>
+          <button class="password-copy" id="passwordCopy" aria-label="Copy password">
+            <span class="copy-icon" id="copyIcon">📋</span>
+            <span class="copy-check" id="copyCheck" style="display:none">✅</span>
+          </button>
+        </div>
+        <div class="password-info">
+          <span class="password-warn" data-i18n="password.warn">⚠️ Case Sensitive</span>
+          <span class="password-history" data-i18n="password.history">History: @coserdh / @CosYiMi / 123321</span>
+        </div>
+        <div class="password-steps">
+          <h3 data-i18n="password.steps_title">Steps</h3>
+          <ol>
+            <li data-i18n="password.step1">Ensure all parts (.part1/.001) are in the same folder</li>
+            <li data-i18n="password.step2">Right-click the first part and extract</li>
+            <li data-i18n="password.step3">Recommend Bandizip / ZArchiver</li>
+          </ol>
+        </div>
+        <div class="password-tools-tip">
+          <span data-i18n="password.tools_tip">📱 Recommended: Bandizip (Win) · 文件家 (iOS) · ZArchiver (Android)</span>
         </div>
       </div>
     </div>

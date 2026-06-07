@@ -279,7 +279,37 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ════════════════════════ */
-  /* 7. Smooth hash scrolling */
+  /* 7. Password Copy         */
+  /* ════════════════════════ */
+  const passwordDisplay = document.getElementById('passwordDisplay');
+  const passwordText = document.getElementById('passwordText');
+  const copyIcon = document.getElementById('copyIcon');
+  const copyCheck = document.getElementById('copyCheck');
+  if (passwordDisplay && passwordText) {
+    passwordDisplay.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(passwordText.textContent);
+        if (copyIcon && copyCheck) {
+          copyIcon.style.display = 'none';
+          copyCheck.style.display = 'inline';
+          setTimeout(() => {
+            copyIcon.style.display = 'inline';
+            copyCheck.style.display = 'none';
+          }, 2000);
+        }
+      } catch (e) {
+        // fallback for older browsers
+        const range = document.createRange();
+        range.selectNodeContents(passwordText);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      }
+    });
+  }
+
+  /* ════════════════════════ */
+  /* 8. Smooth hash scrolling */
   /* ════════════════════════ */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
