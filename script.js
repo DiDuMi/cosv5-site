@@ -174,6 +174,14 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ════════════════════════ */
   /* 5. Stat Counters         */
   /* ════════════════════════ */
+  function formatCounter(val) {
+    if (val >= 1000) {
+      const k = val / 1000;
+      return k % 1 === 0 ? k + 'k' : k.toFixed(1) + 'k';
+    }
+    return String(val);
+  }
+
   function animateCounter(el, target) {
     const duration = 2000, steps = 60;
     const increment = target / steps;
@@ -181,8 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const timer = setInterval(() => {
       step++;
       const current = Math.min(Math.round(increment * step), target);
-      el.textContent = target > 1000 ? current.toLocaleString() : current;
-      if (step >= steps) { el.textContent = target > 1000 ? target.toLocaleString() : target; clearInterval(timer); }
+      el.textContent = formatCounter(current);
+      if (step >= steps) {
+        el.textContent = formatCounter(target);
+        clearInterval(timer);
+      }
     }, duration / steps);
   }
 
