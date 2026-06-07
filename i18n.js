@@ -113,7 +113,7 @@ const I18N = {
     footer: {
       tagline: 'Cosplay · Community · Sharing',
     },
-    langToggle: 'eng',
+    langToggle: '文',
   },
 
   zh: {
@@ -228,7 +228,7 @@ const I18N = {
     footer: {
       tagline: 'Cosplay · 社群 · 分享',
     },
-    langToggle: '文',
+    langToggle: 'eng',
   },
 };
 

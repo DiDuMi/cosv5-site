@@ -193,12 +193,12 @@ section {
   color: var(--accent-pink);
 }
 .lang-toggle.lang-en {
-  border-color: rgba(34,211,238,0.4);
-  color: var(--accent-cyan);
-}
-.lang-toggle.lang-zh {
   border-color: rgba(255,45,123,0.4);
   color: var(--accent-pink);
+}
+.lang-toggle.lang-zh {
+  border-color: rgba(34,211,238,0.4);
+  color: var(--accent-cyan);
 }
 .nav-toggle {
   display: none;
