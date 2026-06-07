@@ -349,6 +349,62 @@ section {
   margin-top: 8px;
 }
 
+/* ─── PHILOSOPHY ─── */
+.philosophy {
+  background: var(--bg-primary);
+  text-align: center;
+}
+.philosophy-quotes {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.philosophy-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 420px;
+  background: var(--bg-card);
+  border: var(--border-glow);
+  border-radius: var(--radius-lg);
+  padding: 40px 28px;
+  position: relative;
+  transition: all 0.4s ease;
+}
+.philosophy-card:hover {
+  border-color: rgba(255, 45, 123, 0.3);
+  transform: translateY(-4px);
+  box-shadow: var(--glow-pink);
+}
+.philosophy-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 20px;
+}
+.philosophy-card blockquote {
+  font-family: 'Georgia', 'Noto Serif SC', serif;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text-primary);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+.philosophy-card blockquote::before {
+  content: '"';
+  display: block;
+  font-size: 3rem;
+  font-family: Georgia, serif;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 8px;
+  opacity: 0.6;
+}
+
 /* ─── TIMELINE ─── */
 .timeline {
   background: var(--bg-primary);
