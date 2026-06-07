@@ -1,0 +1,7 @@
+# Cloudflare Pages 配置 — 纯静态站点，无需额外配置
+
+# 安全头
+/* 
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
