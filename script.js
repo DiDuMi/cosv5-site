@@ -335,4 +335,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ════════════════════════ */
+  /* 9. Reading progress bar  */
+  /* ════════════════════════ */
+  const progressBar = document.createElement('div');
+  progressBar.className = 'progress-bar';
+  document.body.appendChild(progressBar);
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.transform = `scaleX(${progress / 100})`;
+  }, { passive: true });
+
+  /* ════════════════════════ */
+  /* 10. Back to top button   */
+  /* ════════════════════════ */
+  const backToTop = document.createElement('button');
+  backToTop.className = 'back-to-top';
+  backToTop.setAttribute('aria-label', 'Back to top');
+  backToTop.innerHTML = '<svg viewBox="0 0 20 20" fill="none" style="width:20px;height:20px"><path d="M10 16V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 10L10 4L16 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.body.appendChild(backToTop);
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
 });
