@@ -403,6 +403,33 @@ section {
   font-size: 2.5rem;
   display: block;
   margin-bottom: 20px;
+  color: var(--accent-pink);
+}
+.svg-icon {
+  width: 48px;
+  height: 48px;
+  display: block;
+  margin: 0 auto;
+}
+.channel-card-icon .svg-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--accent-cyan);
+}
+.feature-icon .svg-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--accent-purple);
+}
+.tool-bot-icon .svg-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--accent-cyan);
+}
+.tools-feature-icon .svg-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--accent-pink);
 }
 .philosophy-card blockquote {
   font-family: 'Georgia', 'Noto Serif SC', serif;

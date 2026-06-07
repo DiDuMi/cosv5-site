@@ -89,13 +89,13 @@ const I18N = {
     password: {
       title: 'Universal Password',
       desc: 'One password for all archives. Click to copy.',
-      warn: '⚠️ Case Sensitive',
+      warn: 'Case Sensitive',
       history: 'History: @coserdh / @CosYiMi / 123321',
       steps_title: 'Steps',
       step1: 'Ensure all parts (.part1/.001) are in the same folder',
       step2: 'Right-click the first part and extract',
       step3: 'Recommend Bandizip / ZArchiver',
-      tools_tip: '📱 Bandizip (Win) · Files (iOS) · ZArchiver (Android)',
+      tools_tip: 'Bandizip (Win) · Files (iOS) · ZArchiver (Android)',
     },
     team: {
       title: 'Behind the Scenes',
@@ -210,7 +210,7 @@ const I18N = {
       step1: '确保所有分卷 (.part1/.001) 在同一文件夹',
       step2: '右键点击第一个分卷进行解压',
       step3: '推荐使用 Bandizip / ZArchiver',
-      tools_tip: '📱 Bandizip（Win）· 文件家（iOS）· ZArchiver（Android）',
+      tools_tip: 'Bandizip（Win）· 文件家（iOS）· ZArchiver（Android）',
     },
     team: {
       title: '幕后',
