@@ -698,20 +698,93 @@ section {
   border-color: rgba(124, 58, 237, 0.3);
   transform: translateY(-3px);
 }
+.team-card:hover .team-avatar {
+  transform: scale(1.08);
+}
+.team-card:hover .avatar-letter {
+  filter: brightness(1.2);
+}
 .team-avatar {
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: var(--avatar-bg, var(--accent-purple));
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 700;
   margin: 0 auto 16px;
   color: white;
-  box-shadow: 0 0 30px rgba(255,45,123,0.2);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden; transition: transform 0.3s ease;
+}
+.team-avatar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: -1;
+}
+.team-avatar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.4;
+}
+.team-avatar[style*="--avatar-bg: #ff2d55"]::before {
+  background: linear-gradient(135deg, #ff2d55, #7c3aed);
+}
+.team-avatar[style*="--avatar-bg: #ff2d55"]::after {
+  background:
+    linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.12) 50%, transparent 60%),
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, transparent 50%),
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 6px,
+      rgba(255,255,255,0.04) 6px,
+      rgba(255,255,255,0.04) 7px
+    );
+}
+/* DiDu - hex tech pattern */
+.team-avatar[style*="--avatar-bg: #ff2d55"] .avatar-letter {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 20px rgba(255,45,123,0.8), 0 0 40px rgba(255,45,123,0.4);
+  background: linear-gradient(135deg, #fff, #ffb3d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2rem;
+}
+/* 小z - wave/circuit pattern */
+.team-avatar[style*="--avatar-bg: #5856d6"]::before {
+  background: linear-gradient(135deg, #5856d6, #22d3ee);
+}
+.team-avatar[style*="--avatar-bg: #5856d6"]::after {
+  background:
+    radial-gradient(circle at 70% 70%, rgba(34,211,238,0.2) 0%, transparent 50%),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 5px,
+      rgba(255,255,255,0.05) 5px,
+      rgba(255,255,255,0.05) 6px
+    );
+}
+.team-avatar[style*="--avatar-bg: #5856d6"] .avatar-letter {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 20px rgba(34,211,238,0.8), 0 0 40px rgba(34,211,238,0.4);
+  background: linear-gradient(135deg, #fff, #a5f3fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.8rem;
 }
 .team-card h3 { font-size: 1.2rem; margin-bottom: 4px; }
 .team-role {
