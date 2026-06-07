@@ -27,7 +27,7 @@ const I18N = {
       resources: 'Resources Shared',
       days: 'Days Active',
       daysSuffix: 'days',
-      firsts: 'Community Firsts',
+      firsts: 'Curated Packs',
     },
     philosophy: {
       title: 'Our Philosophy',
@@ -110,7 +110,7 @@ const I18N = {
       resources: '累计分享',
       days: '已运营',
       daysSuffix: '天',
-      firsts: '社群特色',
+      firsts: '精选资源包',
     },
     philosophy: {
       title: '我们的理念',
