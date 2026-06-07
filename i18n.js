@@ -113,7 +113,7 @@ const I18N = {
     footer: {
       tagline: 'Cosplay · Community · Sharing',
     },
-    langToggle: '中文',
+    langToggle: 'eng',
   },
 
   zh: {
@@ -228,7 +228,7 @@ const I18N = {
     footer: {
       tagline: 'Cosplay · 社群 · 分享',
     },
-    langToggle: 'English',
+    langToggle: '文',
   },
 };
 
@@ -254,9 +254,13 @@ function renderText() {
   // timeline items (built by JS, re-render)
   renderTimeline();
 
-  // toggle button text
+  // toggle button text + active state
   const toggle = document.getElementById('langToggle');
-  if (toggle) toggle.textContent = I18N[currentLang].langToggle;
+  if (toggle) {
+    toggle.textContent = I18N[currentLang].langToggle;
+    toggle.classList.toggle('lang-en', currentLang === 'en');
+    toggle.classList.toggle('lang-zh', currentLang === 'zh');
+  }
 
   // HTML lang
   document.documentElement.lang = currentLang;
