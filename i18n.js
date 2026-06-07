@@ -31,6 +31,8 @@ const I18N = {
     },
     philosophy: {
       title: 'Our Philosophy',
+      q1: 'Taste and appreciate its appearance,<br>and imagine its own world.',
+      q2: 'Just organize and share,<br>so that the circulating works<br>can reach more people who love them.',
     },
     timeline: {
       title: 'Our Journey',
@@ -112,6 +114,8 @@ const I18N = {
     },
     philosophy: {
       title: '我们的理念',
+      q1: '品味它的模样，<br>想象属于它的世界。',
+      q2: '只是整理和分享，<br>让流传的作品，<br>到达更多热爱它们的人手中。',
     },
     timeline: {
       title: '发展历程',
