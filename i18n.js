@@ -113,6 +113,16 @@ const I18N = {
     footer: {
       tagline: 'Cosplay · Community · Sharing',
     },
+    section: {
+      about: "ABOUT",
+      philosophy: "PHILOSOPHY",
+      timeline: "HISTORY",
+      channels: "CHANNELS",
+      features: "FEATURES",
+      tools: "TOOLS",
+      team: "TEAM",
+      password: "PASSWORD",
+    },
     langToggle: '文',
   },
 
@@ -204,7 +214,7 @@ const I18N = {
     password: {
       title: '通用密码',
       desc: '所有压缩包统一密码。点击即可复制。',
-      warn: '⚠️ 严格区分大小写',
+      warn: '严格区分大小写',
       history: '历史密码：@coserdh / @CosYiMi / 123321',
       steps_title: '解压步骤',
       step1: '确保所有分卷 (.part1/.001) 在同一文件夹',
@@ -227,6 +237,16 @@ const I18N = {
     },
     footer: {
       tagline: 'Cosplay · 社群 · 分享',
+    },
+    section: {
+      about: "关于",
+      philosophy: "理念",
+      timeline: "历程",
+      channels: "频道",
+      features: "特色",
+      tools: "工具",
+      team: "团队",
+      password: "密码",
     },
     langToggle: 'eng',
   },
