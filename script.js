@@ -147,8 +147,16 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let entry of entries) {
         if (entry.isIntersecting) {
           const el = entry.target;
-          const target = parseInt(el.dataset.target) || 0;
-          animateCounter(el, target);
+          if (el.dataset.fromDate) {
+            // calculate days since founding date
+            const from = new Date(el.dataset.fromDate);
+            const now = new Date();
+            const diff = Math.floor((now - from) / (1000 * 60 * 60 * 24));
+            animateCounter(el, diff);
+          } else {
+            const target = parseInt(el.dataset.target) || 0;
+            animateCounter(el, target);
+          }
           counterObserver.unobserve(el);
         }
       }
@@ -197,10 +205,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /* 6. Timeline              */
   /* ════════════════════════ */
   const timelineData = [
-    { year: '2025', month: 'Q1', title: '社群构想', desc: '低毒提出 COSV5 社群构想，开始筹建 Telegram Cosplay 资源分发网络。' },
-    { year: '2025', month: 'Q2', title: '首个频道上线', desc: '@COSV5 系列频道正式上线，首批资源发布，吸引种子用户。' },
-    { year: '2025', month: 'Q3', title: '矩阵扩张', desc: '频道矩阵初具规模，订阅突破 1000，开始探索会员共享模式。' },
-    { year: '2025', month: 'Q4', title: '行业首创', desc: '推出邮箱绑定、许愿卡等开创性功能，重新定义社群服务标准。' },
+    { year: '2024', month: '5月', title: '社群成立', desc: '2024年5月1日，COSV5 社群正式成立，低毒开启 Telegram Cosplay 资源分发之路。' },
+    { year: '2024', month: 'Q3', title: '初具规模', desc: '首批种子用户加入，频道矩阵雏形初现。' },
+    { year: '2025', month: 'Q1', title: '矩阵扩张', desc: '频道矩阵快速扩张，订阅突破 1000，开始探索会员共享模式。' },
+    { year: '2025', month: 'Q3', title: '行业首创', desc: '推出邮箱绑定、许愿卡等开创性功能，重新定义社群服务标准。' },
     { year: '2026', month: 'Q1', title: '高速增长', desc: '@COSV5_COM 订阅突破 5000，每日曝光达限 10万+。影响力持续扩大。' },
     { year: '2026', month: 'Q2', title: '技术升级', desc: '引入 TG-Hamster 自动采集系统，实现全链路数据化运营。' },
     { year: '2026', month: '未来', title: '持续进化', desc: '全球化布局、更多创新功能、更完善的社群生态——敬请期待。' },
