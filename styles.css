@@ -711,80 +711,173 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  font-weight: 700;
   margin: 0 auto 16px;
-  color: white;
   position: relative;
   isolation: isolate;
-  overflow: hidden; transition: transform 0.3s ease;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 .team-avatar::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: -2px;
   border-radius: 50%;
   z-index: -1;
 }
-.team-avatar::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  z-index: -1;
-  opacity: 0.4;
-}
-.team-avatar[style*="--avatar-bg: #ff2d55"]::before {
-  background: linear-gradient(135deg, #ff2d55, #7c3aed);
-}
-.team-avatar[style*="--avatar-bg: #ff2d55"]::after {
-  background:
-    linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.12) 50%, transparent 60%),
-    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, transparent 50%),
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 6px,
-      rgba(255,255,255,0.04) 6px,
-      rgba(255,255,255,0.04) 7px
-    );
-}
-/* DiDu - hex tech pattern */
-.team-avatar[style*="--avatar-bg: #ff2d55"] .avatar-letter {
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 0 20px rgba(255,45,123,0.8), 0 0 40px rgba(255,45,123,0.4);
-  background: linear-gradient(135deg, #fff, #ffb3d1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 2rem;
-}
-/* 小z - wave/circuit pattern */
-.team-avatar[style*="--avatar-bg: #5856d6"]::before {
+
+/* ─── 小z: AI Robot ─── */
+.team-avatar.avatar-bot::before {
   background: linear-gradient(135deg, #5856d6, #22d3ee);
 }
-.team-avatar[style*="--avatar-bg: #5856d6"]::after {
-  background:
-    radial-gradient(circle at 70% 70%, rgba(34,211,238,0.2) 0%, transparent 50%),
-    repeating-linear-gradient(
-      -45deg,
-      transparent,
-      transparent 5px,
-      rgba(255,255,255,0.05) 5px,
-      rgba(255,255,255,0.05) 6px
-    );
+.team-avatar.avatar-bot {
+  box-shadow: 0 0 25px rgba(34,211,238,0.25);
 }
-.team-avatar[style*="--avatar-bg: #5856d6"] .avatar-letter {
+.avatar-bot-inner {
   position: relative;
-  z-index: 1;
-  text-shadow: 0 0 20px rgba(34,211,238,0.8), 0 0 40px rgba(34,211,238,0.4);
-  background: linear-gradient(135deg, #fff, #a5f3fc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 1.8rem;
+  width: 48px;
+  height: 48px;
+}
+/* antenna */
+.avatar-bot-inner::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 10px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 1px;
+}
+.avatar-bot-inner::after {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 6px rgba(34,211,238,0.8);
+}
+/* robot head */
+.bot-head {
+  position: absolute;
+  inset: 4px;
+  border: 2px solid rgba(255,255,255,0.7);
+  border-radius: 6px;
+  background: rgba(255,255,255,0.06);
+}
+/* robot eyes */
+.bot-eyes {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+.bot-eye {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22d3ee;
+  box-shadow: 0 0 8px rgba(34,211,238,0.6);
+}
+/* robot mouth */
+.bot-mouth {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+}
+.bot-mouth span {
+  width: 3px;
+  height: 5px;
+  border-radius: 1px;
+  background: rgba(255,255,255,0.5);
+}
+.bot-mouth span:nth-child(2) { height: 3px; }
+.bot-mouth span:nth-child(3) { height: 5px; }
+
+/* ─── 低毒: Tech Guy ─── */
+.team-avatar.avatar-guy::before {
+  background: linear-gradient(135deg, #ff2d55, #7c3aed);
+}
+.team-avatar.avatar-guy {
+  box-shadow: 0 0 25px rgba(255,45,123,0.25);
+}
+.avatar-guy-inner {
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+/* head silhouette */
+.guy-head {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.06);
+}
+/* glasses */
+.guy-glasses {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.guy-glasses::before, .guy-glasses::after {
+  content: '';
+  width: 10px;
+  height: 7px;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  border-radius: 3px;
+  background: rgba(34,211,238,0.15);
+}
+.guy-glasses::before { content: ''; }
+.guy-glasses::after { content: ''; }
+.glass-bridge {
+  width: 4px;
+  height: 1.5px;
+  background: rgba(255,255,255,0.4);
+  flex-shrink: 0;
+}
+/* body/hoodie */
+.guy-body {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 4px 4px 8px 8px;
+  border-top: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  background: rgba(255,255,255,0.04);
+}
+/* headphones band */
+.guy-band {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
 }
 .team-card h3 { font-size: 1.2rem; margin-bottom: 4px; }
 .team-role {
