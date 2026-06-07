@@ -56,6 +56,8 @@ const I18N = {
       vip: { desc: 'Curated · Premium collections' },
       fr: { desc: 'International · French & global' },
       gd: { desc: 'Coser collaboration channel' },
+      lang_title: "Language Channels",
+      backup: "All channels and groups have backup accounts. If a channel becomes unavailable, check the group for the latest backup link.",
       sub: 'subscribers',
     },
     features: {
@@ -181,6 +183,8 @@ const I18N = {
       vip: { desc: '精选 · 高品质合集' },
       fr: { desc: '国际版 · 法语 & 全球化' },
       gd: { desc: 'Coser 合作频道' },
+      lang_title: "多语言频道",
+      backup: "所有频道和群组均有备份账号。如果某个频道不可用，请在群组中查看最新的备份链接。",
       sub: '订阅',
     },
     features: {
