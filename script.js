@@ -244,36 +244,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let currentSlide = 0;
+    let isScrolling = false;
 
     function goToSlide(index) {
-      currentSlide = Math.max(0, Math.min(index, timelineData.length - 1));
+      index = Math.max(0, Math.min(index, timelineData.length - 1));
+      if (index === currentSlide) return;
+      currentSlide = index;
+      isScrolling = true;
       const items = track.querySelectorAll('.timeline-item');
       const dots = document.querySelectorAll('.tl-dot');
       items.forEach((el, i) => el.classList.toggle('active', i === currentSlide));
       if (dots) dots.forEach((el, i) => el.classList.toggle('active', i === currentSlide));
       const item = items[currentSlide];
       if (item) {
-        item.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        const scrollTo = item.offsetLeft - (track.clientWidth - item.offsetWidth) / 2;
+        track.scrollTo({ left: scrollTo, behavior: 'smooth' });
       }
+      setTimeout(() => { isScrolling = false; }, 400);
     }
 
     if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
     if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
 
-    // scroll sync
+    // scroll sync — debounced, skip during programmatic scroll
+    let scrollTimer = null;
     track.addEventListener('scroll', () => {
-      const items = track.querySelectorAll('.timeline-item');
-      let closest = 0;
-      let closestDist = Infinity;
-      const trackRect = track.getBoundingClientRect();
-      const center = trackRect.left + trackRect.width / 2;
-      items.forEach((el, i) => {
-        const rect = el.getBoundingClientRect();
-        const elCenter = rect.left + rect.width / 2;
-        const dist = Math.abs(elCenter - center);
-        if (dist < closestDist) { closestDist = dist; closest = i; }
-      });
-      if (closest !== currentSlide) goToSlide(closest);
+      if (isScrolling) return;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const items = track.querySelectorAll('.timeline-item');
+        let closest = 0;
+        let closestDist = Infinity;
+        const trackRect = track.getBoundingClientRect();
+        const center = trackRect.left + trackRect.width / 2;
+        items.forEach((el, i) => {
+          const rect = el.getBoundingClientRect();
+          const elCenter = rect.left + rect.width / 2;
+          const dist = Math.abs(elCenter - center);
+          if (dist < closestDist) { closestDist = dist; closest = i; }
+        });
+        if (closest !== currentSlide) {
+          currentSlide = closest;
+          const dots = document.querySelectorAll('.tl-dot');
+          items.forEach((el, i) => el.classList.toggle('active', i === closest));
+          if (dots) dots.forEach((el, i) => el.classList.toggle('active', i === closest));
+        }
+      }, 50);
     });
   }
 
