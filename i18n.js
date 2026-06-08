@@ -14,15 +14,15 @@ const I18N = {
     },
     hero: {
       badge: 'Telegram · Cosplay · Community',
-      sub: 'Sharing what we love.',
-      desc: 'A community born from a shared passion for Cosplay —<br>curating and sharing, so great works find the eyes they deserve.',
+      sub: 'Connect quality content with the people who love it.',
+      desc: 'A Cosplay community that aggregates, curates and organizes<br>quality resources — delivering them to the people who truly appreciate them.',
       cta1: 'Our Story →',
       cta2: 'Join Us',
       scroll: 'Scroll to explore',
     },
     about: {
       title: 'Our Story',
-      desc: 'COSV5 started as a simple idea: gather great Cosplay resources and share them with people who appreciate them. What began small grew into a community built on trust, curation, and a genuine love for the art.',
+      desc: 'Founded <b>May 1, 2024</b> as \'Coser Gallery\'. The founder sold two physical stores and holds lifetime memberships of hundreds of paid websites. Forum moderator of multiple communities.<br><br>Through bans and rebuilds — today: 100+ channel matrix, points ecosystem, custom tools. From Coser Gallery to COSV5, the name changed but the mission didn\'t.',
     },
     stats: {
       members: 'Community Members',
@@ -32,9 +32,9 @@ const I18N = {
       firsts: 'Industry Firsts',
     },
     philosophy: {
-      title: 'Our Philosophy',
-      q1: 'Taste and appreciate its appearance,<br>and imagine its own world.',
-      q2: 'Just organize and share,<br>so that the circulating works<br>can reach more people who love them.',
+      title: 'Our Mission',
+      q1: 'Connect quality leaked resources<br>with the people who truly appreciate them.',
+      q2: 'We don\'t cause leaks. We organize what\'s already out there —<br>aggregating, curating, and delivering efficiently to those who love the art.',
     },
     timeline: {
       title: 'Our Journey',
@@ -63,8 +63,8 @@ const I18N = {
       sub: 'subscribers',
     },
     features: {
-      title: 'What Makes Us, Us',
-      desc: 'Things we tried that made a difference.',
+      title: 'Our Approach',
+      desc: 'What sets us apart.',
       f1: { title: 'Resource Sharing', desc: 'Creating channels dedicated to Cosplay content, so great works reach the right audience.' },
       f2: { title: 'Shared Access', desc: 'Sharing Cosplay site memberships to make quality content more accessible for everyone.' },
       f3: { title: 'Email Security', desc: 'Offering email-bound membership protection, because trust matters.' },
@@ -104,12 +104,12 @@ const I18N = {
     team: {
       title: 'Behind the Scenes',
       desc: 'The people who make it happen.',
-      m1: { name: 'DiDu', role: 'Founder · Operations', desc: 'Started it all. Keeps it running day by day.' },
+      m1: { name: '低毒', role: 'Founder · Operations', desc: 'Started it all. Keeps it running day by day.' },
       m2: { name: '小z', role: 'AI Engineer', desc: 'Automation, data, and tech infrastructure — the gears behind the scenes.' },
     },
     join: {
       title: 'Join COSV5',
-      desc: 'Love Cosplay? Come hang out.<br>Get curated content and a community that shares your passion.',
+      desc: 'Like Cosplay? You\'re in the right place.<br>Get curated quality resources and be part of a community that shares your passion.',
       btn1: 'Subscribe',
       btn2: 'Join Chat',
       bot: '— Paid Membership',
@@ -151,7 +151,7 @@ const I18N = {
     },
     about: {
       title: '我们的故事',
-      desc: 'COSV5 始于一个简单的想法：收集优质的 Cosplay 资源，分享给同样热爱它们的人。从一点点开始，慢慢长成一个靠信任和热爱维系的社群。',
+      desc: '<b>2024年5月1日</b>以「Coser展馆」创立。创始人为投入社群建设，处理了两家实体店，站长持有上百个付费网站的终身会员，多个论坛版主。<br><br>走过低谷、走过封禁，走到今天——100+ 频道矩阵 · 积分生态 · 自研工具。从Coser展馆到COSV5，名字在变，初心没变。',
     },
     stats: {
       members: '社群成员',
@@ -162,8 +162,8 @@ const I18N = {
     },
     philosophy: {
       title: '我们的理念',
-      q1: '品味它的模样，<br>想象属于它的世界。',
-      q2: '只是整理和分享，<br>让流传的作品，<br>到达更多热爱它们的人手中。',
+      q1: '让已经流出的优质资源，<br>触达更多爱好者。',
+      q2: '我们不促成流出，不鼓励白嫖。<br>我们做的事：把已流出的资源聚合、筛选、整理，<br>高效分发给真正喜欢的人。',
     },
     timeline: {
       title: '发展历程',
@@ -193,7 +193,7 @@ const I18N = {
     },
     features: {
       title: '我们的特色',
-      desc: '我们做了一些不一样的事。',
+      desc: '我们在做的事。',
       f1: { title: '资源分享', desc: '专注 Cosplay 内容分发，让好作品找到属于它的观众。' },
       f2: { title: '共享会员', desc: '共享 Cosplay 站点会员，降低门槛，让更多人看到优质内容。' },
       f3: { title: '邮箱保障', desc: '提供邮箱绑定保障会员权益——信任是社群的基础。' },
@@ -238,7 +238,7 @@ const I18N = {
     },
     join: {
       title: '加入 COSV5',
-      desc: '喜欢 Cosplay？来一起玩。<br>获取精选资源，和同好一起分享。',
+      desc: '喜欢 Cosplay？来对地方了。<br>获取精选资源，加入同好的圈子。',
       btn1: '订阅频道',
       btn2: '加入群聊',
       bot: '— 付费加入',
