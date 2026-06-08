@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>COSV5 Telegraph Manager</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0a0a0f; color: #e0d0e8; font-family: system-ui, -apple-system, sans-serif; min-height: 100vh; }
+.container { max-width: 960px; margin: 0 auto; padding: 20px; }
+
+/* Header */
+header { padding: 24px 0; border-bottom: 1px solid #1e1e2e; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+h1 { font-size: 1.3rem; background: linear-gradient(135deg, #ff2d7b, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+h1 small { font-size: .7rem; -webkit-text-fill-color: #666; }
+.header-actions { display: flex; gap: 8px; align-items: center; }
+.btn { background: #1e1e2e; border: 1px solid #333; color: #e0d0e8; padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: .82rem; }
+.btn:hover { background: #2a2a3e; }
+.btn-primary { background: linear-gradient(135deg, #7c3aed44, #ff2d7b44); border-color: #7c3aed; }
+.btn-primary:hover { background: linear-gradient(135deg, #7c3aed66, #ff2d7b66); }
+.token-bar { background: #12121a; border: 1px solid #1e1e2e; border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.token-bar label { font-size: .82rem; color: #888; }
+.token-bar input { flex: 1; min-width: 200px; background: #0a0a0f; border: 1px solid #333; color: #e0d0e8; padding: 6px 10px; border-radius: 6px; font-size: .82rem; font-family: monospace; }
+.token-bar .hint { font-size: .75rem; color: #555; }
+
+/* Loading */
+.loading { text-align: center; padding: 60px 20px; color: #666; }
+.error { text-align: center; padding: 40px 20px; color: #ff2d7b; }
+
+/* Stats */
+.stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.stat-card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 10px; padding: 14px; text-align: center; }
+.stat-number { font-size: 1.6rem; font-weight: 700; background: linear-gradient(135deg, #ff2d7b, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-label { font-size: .78rem; color: #888; margin-top: 3px; }
+
+/* Filter */
+.filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.filter-bar input { background: #12121a; border: 1px solid #1e1e2e; color: #e0d0e8; padding: 8px 12px; border-radius: 8px; font-size: .85rem; flex: 1; min-width: 150px; }
+
+/* Page Card */
+.page-card { background: #12121a; border: 1px solid #1e1e2e; border-radius: 10px; padding: 16px 18px; margin-bottom: 10px; transition: border-color .2s; }
+.page-card:hover { border-color: #7c3aed44; }
+.page-title { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+.page-title a { color: #e0d0e8; text-decoration: none; }
+.page-title a:hover { color: #ff2d7b; }
+.page-meta { font-size: .8rem; color: #888; display: flex; gap: 14px; flex-wrap: wrap; }
+.page-meta span { display: inline-flex; align-items: center; gap: 3px; }
+.edit-links { margin-top: 8px; font-size: .78rem; }
+.edit-links a { color: #7c3aed; text-decoration: none; margin-right: 12px; }
+.edit-links a:hover { text-decoration: underline; }
+.tag { display: inline-block; font-size: .68rem; padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
+.tag-hot { background: #ff2d7b22; color: #ff2d7b; border: 1px solid #ff2d7b44; }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 100; align-items: center; justify-content: center; }
+.modal-overlay.active { display: flex; }
+.modal { background: #12121a; border: 1px solid #1e1e2e; border-radius: 14px; padding: 24px; width: 90%; max-width: 700px; max-height: 85vh; overflow: auto; }
+.modal h2 { font-size: 1.1rem; margin-bottom: 12px; }
+.modal textarea { width: 100%; min-height: 300px; background: #0a0a0f; border: 1px solid #333; color: #e0d0e8; padding: 12px; border-radius: 8px; font-family: monospace; font-size: .82rem; resize: vertical; }
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+.close-btn { position: absolute; top: 12px; right: 16px; font-size: 1.2rem; cursor: pointer; color: #666; background: none; border: none; }
+
+/* Month chart */
+.chart-container { margin-top: 8px; }
+.chart-bars { display: flex; gap: 3px; height: 50px; align-items: flex-end; }
+.chart-bar-item { flex: 1; min-width: 20px; background: #1e1e2e; border-radius: 3px 3px 0 0; position: relative; display: flex; align-items: flex-end; overflow: hidden; cursor: help; }
+.chart-bar-fill { width: 100%; background: linear-gradient(0deg, #7c3aed, #ff2d7b); border-radius: 3px 3px 0 0; min-height: 2px; transition: height .5s; }
+.chart-labels { display: flex; gap: 3px; font-size: .6rem; color: #555; }
+.chart-labels span { flex: 1; text-align: center; }
+
+footer { text-align: center; padding: 30px; color: #333; font-size: .78rem; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>📡 COSV5 Telegraph Manager</h1>
+    <div class="header-actions">
+      <button class="btn btn-primary" onclick="saveToken()">💾 Save</button>
+      <button class="btn" onclick="loadAll()">🔄 Refresh</button>
+    </div>
+  </header>
+
+  <!-- Token -->
+  <div class="token-bar">
+    <label>🔑 Access Token:</label>
+    <input type="password" id="tokenInput" placeholder="Paste your Telegraph access token" spellcheck="false">
+    <span class="hint">存于浏览器 localStorage，仅你可见</span>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row" id="statsRow"></div>
+
+  <!-- Filter -->
+  <div class="filter-bar">
+    <input type="text" id="searchInput" placeholder="🔍 Search by title..." oninput="renderPages()">
+    <select id="sortSelect" onchange="renderPages()" style="background:#12121a;border:1px solid #1e1e2e;color:#e0d0e8;padding:8px 12px;border-radius:8px;font-size:.82rem">
+      <option value="views">Sort by Views ↓</option>
+      <option value="date">Sort by Date ↓</option>
+      <option value="title">Sort by Title</option>
+    </select>
+  </div>
+
+  <!-- Pages -->
+  <div id="content"><div class="loading">🔑 先输入 access token，点 Save</div></div>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal" style="position:relative">
+      <button class="close-btn" onclick="closeEdit()">✕</button>
+      <h2 id="editTitle">✏️ Edit Page</h2>
+      <textarea id="editContent" placeholder="HTML content..."></textarea>
+      <div class="modal-actions">
+        <button class="btn" onclick="closeEdit()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveEdit()">💾 Save</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>COSV5 · <span id="footerTime"></span></footer>
+</div>
+
+<script>
+let pages = [];
+let viewsCache = {};
+let editPath = null;
+
+// Token management
+function getToken() { return localStorage.getItem('tg_token') || ''; }
+function saveToken() {
+  const t = document.getElementById('tokenInput').value;
+  localStorage.setItem('tg_token', t);
+  if (t) loadAll();
+}
+
+// Init
+document.getElementById('tokenInput').value = getToken();
+
+async function tgApi(method, params = {}) {
+  const token = getToken();
+  if (!token) throw new Error('No access token');
+  params.access_token = token;
+  const q = new URLSearchParams(params);
+  const r = await fetch('https://api.telegra.ph/' + method + '?' + q);
+  return r.json();
+}
+
+async function loadAll() {
+  document.getElementById('content').innerHTML = '<div class="loading">📡 Loading pages...</div>';
+  try {
+    const data = await tgApi('getPageList', { limit: 50, offset: 0 });
+    if (data.error) {
+      document.getElementById('content').innerHTML = '<div class="error">❌ ' + data.error + '</div>';
+      return;
+    }
+    pages = data.result?.pages || [];
+    
+    // Load views for all pages
+    viewsCache = {};
+    for (const p of pages) {
+      try {
+        const v = await tgApi('getViews', { path: p.path });
+        viewsCache[p.path] = v.result?.views || 0;
+      } catch(e) { viewsCache[p.path] = 0; }
+    }
+    
+    renderPages();
+    renderStats();
+  } catch(e) {
+    document.getElementById('content').innerHTML = '<div class="error">❌ ' + e.message + '</div>';
+  }
+  document.getElementById('footerTime').textContent = new Date().toLocaleString();
+}
+
+function renderStats() {
+  const total = pages.length;
+  const totalViews = Object.values(viewsCache).reduce((a,b) => a + b, 0);
+  const avg = total > 0 ? Math.round(totalViews / total) : 0;
+  document.getElementById('statsRow').innerHTML = [
+    { num: total, label: '📄 Pages' },
+    { num: totalViews.toLocaleString(), label: '👁 Total Views' },
+    { num: avg.toLocaleString(), label: '📊 Avg/Page' },
+  ].map(s => `<div class="stat-card"><div class="stat-number">${s.num}</div><div class="stat-label">${s.label}</div></div>`).join('');
+}
+
+function renderPages() {
+  const search = (document.getElementById('searchInput').value || '').toLowerCase();
+  const sort = document.getElementById('sortSelect').value;
+  
+  let filtered = pages.filter(p => p.title.toLowerCase().includes(search));
+  
+  filtered.sort((a, b) => {
+    if (sort === 'views') return (viewsCache[b.path] || 0) - (viewsCache[a.path] || 0);
+    if (sort === 'title') return a.title.localeCompare(b.title);
+    return (b.views || 0) - (a.views || 0); // date
+  });
+  
+  if (!filtered.length) {
+    document.getElementById('content').innerHTML = '<div class="loading">📭 No pages found</div>';
+    return;
+  }
+  
+  document.getElementById('content').innerHTML = filtered.map(p => {
+    const v = viewsCache[p.path] || 0;
+    const date = new Date(p.views * 1000);
+    const ds = date.toLocaleDateString('zh-CN');
+    const editUrl = 'https://telegra.ph/edit/' + p.path + '/' + getToken();
+    const isHot = v > 100;
+    return `
+      <div class="page-card">
+        <div class="page-title">
+          <a href="https://telegra.ph/${p.path}" target="_blank">${esc(p.title)}</a>
+          ${isHot ? '<span class="tag tag-hot">🔥 HOT</span>' : ''}
+        </div>
+        <div class="page-meta">
+          <span>📅 ${ds}</span>
+          <span>👁 <b>${v.toLocaleString()}</b> views</span>
+          <span>🔗 ${esc(p.path)}</span>
+        </div>
+        <div class="edit-links">
+          <a href="${editUrl}" target="_blank">✏️ 浏览器编辑</a>
+          <a href="#" onclick="openEdit('${esc(p.path)}','${esc(p.title.replace(/'/g,"\\'"))}');return false">📝 在线编辑</a>
+          <a href="https://api.telegra.ph/getViews?path=${p.path}" target="_blank">📊 查看统计</a>
+        </div>
+        ${v > 0 ? renderChart(p.path, v) : ''}
+      </div>
+    `;
+  }).join('');
+}
+
+function renderChart(path, total) {
+  return `<div class="chart-container"><div class="chart-bars"><div class="chart-bar-item" title="All time: ${total}"><div class="chart-bar-fill" style="height:100%"></div></div></div></div>`;
+}
+
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// Edit modal
+async function openEdit(path, title) {
+  editPath = path;
+  document.getElementById('editTitle').textContent = '✏️ ' + title;
+  document.getElementById('editContent').value = 'Loading...';
+  document.getElementById('editModal').classList.add('active');
+  
+  try {
+    const data = await tgApi('getPage', { path, return_content: true });
+    if (data.result) {
+      document.getElementById('editContent').value = JSON.stringify(data.result.content, null, 2);
+    }
+  } catch(e) {
+    document.getElementById('editContent').value = 'Error: ' + e.message;
+  }
+}
+
+function closeEdit() {
+  document.getElementById('editModal').classList.remove('active');
+  editPath = null;
+}
+
+async function saveEdit() {
+  if (!editPath) return;
+  const content = document.getElementById('editContent').value;
+  let parsed;
+  try { parsed = JSON.parse(content); } catch(e) {
+    // Try as HTML string
+    parsed = content;
+  }
+  
+  const body = { path: editPath, content: parsed };
+  
+  const r = await fetch('https://api.telegra.ph/editPage?' + new URLSearchParams({
+    access_token: getToken(),
+    path: editPath,
+    content: JSON.stringify(Array.isArray(parsed) ? parsed : [{tag:'p',children:[parsed]}]),
+  }), { method: 'POST' });
+  const data = await r.json();
+  
+  if (data.error) {
+    alert('❌ ' + data.error);
+  } else {
+    alert('✅ Saved! Refreshing...');
+    closeEdit();
+    loadAll();
+  }
+}
+
+// Keyboard close
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeEdit();
+});
+
+// Auto-load if token exists
+if (getToken()) loadAll();
+</script>
+</body>
+</html>
