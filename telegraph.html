@@ -81,13 +81,6 @@ footer { text-align: center; padding: 30px; color: #333; font-size: .78rem; }
     </div>
   </header>
 
-  <!-- Token -->
-  <div class="token-bar">
-    <label>🔑 Access Token:</label>
-    <input type="password" id="tokenInput" placeholder="Paste your Telegraph access token" spellcheck="false">
-    <span class="hint">存于浏览器 localStorage，仅你可见</span>
-  </div>
-
   <!-- Stats -->
   <div class="stats-row" id="statsRow"></div>
 
@@ -126,24 +119,8 @@ let viewsCache = {};
 let editPath = null;
 
 // Token management
-function getToken() { return localStorage.getItem('tg_token') || ''; }
-function saveToken() {
-  const t = document.getElementById('tokenInput').value;
-  localStorage.setItem('tg_token', t);
-  if (t) loadAll();
-}
 
 // Init
-document.getElementById('tokenInput').value = getToken();
-
-async function tgApi(method, params = {}) {
-  const token = getToken();
-  if (!token) throw new Error('No access token');
-  params.access_token = token;
-  const q = new URLSearchParams(params);
-  const r = await fetch('https://api.telegra.ph/' + method + '?' + q);
-  return r.json();
-}
 
 async function loadAll() {
   document.getElementById('content').innerHTML = '<div class="loading">📡 Loading pages...</div>';
@@ -220,7 +197,7 @@ function renderPages() {
         <div class="edit-links">
           <a href="${editUrl}" target="_blank">✏️ 浏览器编辑</a>
           <a href="#" onclick="openEdit('${esc(p.path)}','${esc(p.title.replace(/'/g,"\\'"))}');return false">📝 在线编辑</a>
-          <a href="https://api.telegra.ph/getViews?path=${p.path}" target="_blank">📊 查看统计</a>
+          <a href="/api/tg?action=views&path=${p.path}" target="_blank">📊 查看统计</a>
         </div>
         ${v > 0 ? renderChart(p.path, v) : ''}
       </div>
@@ -267,11 +244,14 @@ async function saveEdit() {
   
   const body = { path: editPath, content: parsed };
   
-  const r = await fetch('https://api.telegra.ph/editPage?' + new URLSearchParams({
-    access_token: getToken(),
-    path: editPath,
-    content: JSON.stringify(Array.isArray(parsed) ? parsed : [{tag:'p',children:[parsed]}]),
-  }), { method: 'POST' });
+  const r = await fetch('/api/tg?action=edit', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      path: editPath,
+      content: Array.isArray(parsed) ? parsed : [{tag:'p',children:[parsed]}],
+    }),
+  });
   const data = await r.json();
   
   if (data.error) {
@@ -289,7 +269,6 @@ document.addEventListener('keydown', e => {
 });
 
 // Auto-load if token exists
-if (getToken()) loadAll();
 </script>
 </body>
 </html>
