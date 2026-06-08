@@ -118,9 +118,29 @@ let pages = [];
 let viewsCache = {};
 let editPath = null;
 
-// Token management
+// Proxy API call
+async function tgApi(method, params = {}) {
+  // Convert params to query string for GET, body for POST
+  if (method === 'editPage') {
+    // POST
+    const r = await fetch('/api/tg?action=edit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params),
+    });
+    return r.json();
+  }
+  // GET: list, getViews, getPage
+  let urlParams = '';
+  if (method === 'getPageList') urlParams = 'action=list';
+  else if (method === 'getViews') urlParams = 'action=views&path=' + encodeURIComponent(params.path);
+  else if (method === 'getPage') urlParams = 'action=page&path=' + encodeURIComponent(params.path);
+  const r = await fetch('/api/tg?' + urlParams);
+  return r.json();
+}
 
-// Init
+// Auto-load on page
+loadAll();
 
 async function loadAll() {
   document.getElementById('content').innerHTML = '<div class="loading">📡 Loading pages...</div>';
