@@ -23,6 +23,7 @@
       <span class="nav-logo">COSV5</span>
       <div class="nav-links">
         <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#resources" data-i18n="nav.resources">Resources</a>
         <a href="#timeline" data-i18n="nav.timeline">History</a>
         <a href="#channels" data-i18n="nav.channels">Channels</a>
         <a href="#features" data-i18n="nav.features">Features</a>
@@ -95,6 +96,37 @@
           <span class="stat-suffix">+</span>
           <span class="stat-label" data-i18n="stats.firsts">Industry Firsts</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── RESOURCES ─── -->
+  <section class="resources" id="resources">
+    <div class="section-bg-glow right"></div>
+    <div class="container">
+      <div class="section-label reveal">RESOURCES</div>
+      <h2 class="section-title reveal" data-i18n="resources.title">Resources</h2>
+      <p class="section-desc reveal" data-i18n="resources.desc">Premium collection — exclusive to VIP members.</p>
+
+      <div id="resourceList" class="resource-list reveal">
+        <div class="loading">📡 Loading resources...</div>
+      </div>
+
+      <div class="resource-footer reveal">
+        <p data-i18n="resources.footer">👑 Resources link to @COSV5_VIP previews. Join our community to access full collections.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── GUIDE ─── -->
+  <section class="guide-section" id="guide">
+    <div class="container">
+      <div class="section-label reveal">GUIDE</div>
+      <h2 class="section-title reveal" data-i18n="guide.title">Community Guide</h2>
+      <p class="section-desc reveal" data-i18n="guide.desc">Everything you need to know about COSV5.</p>
+
+      <div id="guideContent" class="guide-content reveal">
+        <div class="loading">📡 Loading guide...</div>
       </div>
     </div>
   </section>
@@ -446,7 +478,7 @@
         <div class="join-links">
           <a href="https://t.me/V5joinBot" target="_blank" rel="noopener">@V5joinBot <span data-i18n="join.bot">— Paid Membership</span></a>
           <br>
-          <a href="https://telegra.ph/COSV5-社群综合指南-06-08-11" target="_blank" rel="noopener" style="font-size:0.85rem;opacity:0.7">📖 Full Guide →</a>
+          <a href="#guide" style="font-size:0.85rem;opacity:0.7">📖 Full Guide →</a>
         </div>
       </div>
     </div>
@@ -474,5 +506,75 @@
 
   <script src="i18n.js"></script>
   <script src="script.js"></script>
+  <script>
+    // ─── Load Resources JSON ───
+    async function loadGuide() {
+      const container = document.getElementById('guideContent');
+      try {
+        const res = await fetch('data/guide.json');
+        const data = await res.json();
+        const zh = data.zh;
+        let html = '';
+        zh.sections.forEach(function(s) {
+          switch (s.type) {
+            case 'heading':
+              if (s.level === 3) html += '<h3>' + s.text + '</h3>';
+              else html += '<h4>' + s.text + '</h4>';
+              break;
+            case 'text': html += '<p>' + s.text + '</p>'; break;
+            case 'image': html += '<img src="' + s.src + '" style="max-width:100%;border-radius:12px;margin:1rem 0">'; break;
+            case 'hr': html += '<hr>'; break;
+            case 'blockquote': html += '<blockquote>' + s.text + '</blockquote>'; break;
+            case 'list':
+              html += '<ul>';
+              s.items.forEach(function(item) { html += '<li>' + item + '</li>'; });
+              html += '</ul>';
+              break;
+          }
+        });
+        container.innerHTML = html;
+      } catch (e) {
+        container.innerHTML = '<div class="error">❌ Failed to load guide: ' + escapeHtml(e.message) + '</div>';
+      }
+    }
+
+    loadGuide();
+
+    async function loadResources() {
+      const container = document.getElementById('resourceList');
+      try {
+        const res = await fetch('data/resources.json');
+        const data = await res.json();
+        if (!data.recent || data.recent.length === 0) {
+          container.innerHTML = '<div class="empty-state">📭 No resources yet.</div>';
+          return;
+        }
+        let html = '<div class="resource-items">';
+        data.recent.forEach((item, i) => {
+          const link = item.link || '';
+          html += '<div class="resource-item">';
+          html += '<span class="resource-num">' + (i + 1) + '</span>';
+          if (link) {
+            html += '<a href="' + link + '" target="_blank" rel="noopener" class="resource-link">' + escapeHtml(item.title) + '</a>';
+          } else {
+            html += '<span class="resource-title">' + escapeHtml(item.title) + '</span>';
+          }
+          html += '</div>';
+        });
+        html += '</div>';
+        html += '<div class="resource-meta">🔄 Updated ' + data.updated + ' · ' + data.recent.length + ' items</div>';
+        container.innerHTML = html;
+      } catch (e) {
+        container.innerHTML = '<div class="error">❌ Failed to load: ' + escapeHtml(e.message) + '</div>';
+      }
+    }
+
+    function escapeHtml(text) {
+      const d = document.createElement('div');
+      d.textContent = text;
+      return d.innerHTML;
+    }
+
+  </script>
 </body>
 </html>
