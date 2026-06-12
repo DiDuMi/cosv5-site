@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COSV5 — Resources & Guide</title>
+  <meta name="description" content="COSV5 Resource collections and community guide.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ff2d7b'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0f'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Orbitron,sans-serif' font-weight='900' font-size='16' fill='url(%23g)'%3EV5%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&family=JetBrains+Mono:wght@400;700&family=Righteous&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Resources page specific */
+    .resources-page {
+      padding-top: 80px;
+    }
+    .resources-page .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .resources-page .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+      transition: color 0.2s;
+    }
+    .resources-page .back-link:hover {
+      color: var(--accent-pink);
+    }
+    .resources-page section {
+      padding: 40px 0;
+    }
+    .resources-page .page-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .resources-page .page-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+    .section-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      margin: 2rem 0;
+    }
+    .resource-meta {
+      margin-top: 1rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Guide sub-nav */
+    .guide-toc {
+      position: sticky;
+      top: 80px;
+      margin-bottom: 2rem;
+    }
+    .guide-toc a {
+      display: block;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 6px 0;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+    .guide-toc a:hover {
+      color: var(--accent-pink);
+    }
+    @media (max-width: 768px) {
+      .resources-page {
+        padding-top: 60px;
+      }
+      .resources-page section {
+        padding: 24px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ─── NAV ─── -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <span class="nav-logo">COSV5</span>
+      <div class="nav-links">
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#resources" data-i18n="nav.resources">Resources</a>
+        <a href="#timeline" data-i18n="nav.timeline">History</a>
+        <a href="#channels" data-i18n="nav.channels">Channels</a>
+        <a href="#features" data-i18n="nav.features">Features</a>
+        <a href="#tools" data-i18n="nav.tools">Tools</a>
+        <a href="#team" data-i18n="nav.team">Team</a>
+        <a href="#password" data-i18n="nav.password">Password</a>
+        <a href="#join" class="nav-cta" data-i18n="nav.join">Join</a>
+      </div>
+      <div class="nav-right">
+        <button class="lang-toggle lang-en" id="langToggle" aria-label="Switch language">文</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="resources-page">
+    <div class="container">
+      <a href="/" class="back-link">← Back to Home</a>
+
+      <!-- ─── RESOURCES ─── -->
+      <section id="resources">
+        <h1 class="page-title">📌 Resources</h1>
+        <p class="page-desc">Selective collections — preview at @COSV5_VIP, full access with membership.</p>
+        <div id="resourceList">
+          <div class="loading">📡 Loading...</div>
+        </div>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- ─── GUIDE ─── -->
+      <section id="guide">
+        <h1 class="page-title">📖 Community Guide</h1>
+        <p class="page-desc">Everything you need to know about COSV5.</p>
+        <div id="guideContent">
+          <div class="loading">📡 Loading...</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    var RESOURCE_DATA = {"updated": "2026-06-12", "recent": [{"title": "二阶堂 - 居家自拍 精选[24P1V-42MB]", "link": "https://t.me/COSV5_VIP/1487", "added": "2026-06-12"}, {"title": "一色雨 - 鸣人 精选 [41P1V-818MB]", "link": "https://t.me/COSV5_VIP/1496", "added": "2026-06-12"}, {"title": "CatDemon你的喵崽 - 绝区零 简杜(女特工的秘密训练) [174P5V-1.29GB]", "link": "https://t.me/COSV5_VIP/1473", "added": "2026-06-11"}, {"title": "叫兽 - 会员花絮 小猫小吊带[26P1V-2.93GB]", "link": "https://t.me/COSV5_VIP/1482", "added": "2026-06-11"}, {"title": "二佐Nisa - 6.10 私房 紫旗袍 精选 — 50P2V-3.8GB", "link": "https://t.me/COSV5_VIP/1464", "added": "2026-06-10"}, {"title": "蜜汁猫裘 - 碧蓝航线 信浓 集合 精选 — 206P1V-7.55GB", "link": "https://t.me/COSV5_VIP/1455", "added": "2026-06-10"}, {"title": "五更百鬼 - 碧蓝航线 凉波 精选 — 12P-323MB", "link": "https://t.me/COSV5_VIP/1442", "added": "2026-06-09"}, {"title": "日奈娇 - OL 精选 — 35P6G-215MB", "link": "https://t.me/COSV5_VIP/1435", "added": "2026-06-09"}, {"title": "日奈娇 - 楼道保安 精选 — 164P5V-1.7GB", "link": "https://t.me/COSV5_VIP/1426", "added": "2026-06-09"}, {"title": "封疆疆v - 东方Project 浅间 古装 — 38P-MB", "link": "https://t.me/COSV5_VIP/1417", "added": "2026-06-08"}, {"title": "樱落Selena - 五月舰长图 坎特蕾拉 精选 — 28P-529MB", "link": "https://t.me/COSV5_VIP/1408", "added": "2026-06-08"}, {"title": "叫兽 - 会员花絮 两套 洛丽塔 — 24P1V-888MB", "link": "https://t.me/COSV5_VIP/1401", "added": "2026-06-07"}, {"title": "二佐Nisa - 61 私房 修女 精选 — 55P2V-4.41GB", "link": "https://t.me/COSV5_VIP/1396", "added": "2026-06-07"}, {"title": "叫兽 - 会员花絮 xiaoyang 夕阳下的一缕阳光 — 19P1V-2.36GB", "link": "https://t.me/COSV5_VIP/1392", "added": "2026-06-06"}, {"title": "喜欢爱理吗 - 碧蓝航线 拉菲兔 精选 — 28P-688MB", "link": "https://t.me/COSV5_VIP/1383", "added": "2026-06-06"}, {"title": "阿半今天很开心 - 生或死 约尔 精选 — 52P-363MB", "link": "https://t.me/COSV5_VIP/1374", "added": "2026-06-05"}, {"title": "Cien_恩恩 - 碧蓝航线 可畏 精选 — 30P-149MB", "link": "https://t.me/COSV5_VIP/1356", "added": "2026-06-05"}, {"title": "阿半今天很开心 - 雷姆 精选 — 47P2V-207MB", "link": "https://t.me/COSV5_VIP/1351", "added": "2026-06-04"}, {"title": "阿半今天很开心 - 碧蓝航线 大凤 jk 精选 — 125P-322MB", "link": "https://t.me/COSV5_VIP/1343", "added": "2026-06-04"}, {"title": "叫兽 - 会员花絮 夜班车的双倍快乐 精选 — 135P-2.84GB", "link": "https://t.me/COSV5_VIP/1330", "added": "2026-06-04"}]};
+    var GUIDE_DATA = {"updated": "2026-06-12", "zh": {"sections": [{"type": "heading", "text": "🐹 COSV5 社群指南", "level": 3}, {"type": "image", "src": "https://iili.io/CqjIfI9.gif"}, {"type": "text", "text": "让已经流出的优质资源，触达更多爱好者。"}, {"type": "hr"}, {"type": "heading", "text": "📖 一、关于我们", "level": 4}, {"type": "heading", "text": "📅 我们的故事", "level": 4}, {"type": "text", "text": "社群始于 <strong>2024年5月1日</strong>，原名「Coser展馆」。站长为社群建设，自费开通了上百个付费网站的终身会员，多个论坛版主。"}, {"type": "text", "text": "走过低谷、走过封禁，走到今天——<br>100+ 频道矩阵 · 积分生态 · 自研工具。"}, {"type": "text", "text": "从Coser展馆到COSV5，名字在变，初心没变。💪"}, {"type": "heading", "text": "🎯 我们的理念", "level": 4}, {"type": "text", "text": "让已经流出的优质资源，触达更多爱好者。"}, {"type": "text", "text": "我们不促成流出，不鼓励白嫖。我们做的事：把已流出的资源聚合、筛选、整理，高效分发给真正喜欢的人。"}, {"type": "heading", "text": "🏠 社群构成", "level": 4}, {"type": "blockquote", "text": "🐹 <strong>仓鼠窝</strong>（3K+ 人）<br>每日更新，覆盖多个付费站流出资源 · 不限速 · 不限量 · 可转发"}, {"type": "blockquote", "text": "👑 <strong>大佬群</strong>（1K+ 人）<br>投稿 · 自购 · 许愿 · 定制 — 精选内容"}, {"type": "blockquote", "text": "📢 <strong>订阅频道</strong> — 新资源通知，不错过更新"}, {"type": "blockquote", "text": "🐹 <strong>备份群</strong> — 双群同步，防失联"}, {"type": "heading", "text": "🛠 二、加入方案", "level": 4}, {"type": "heading", "text": "🌱 初级成员", "level": 4}, {"type": "text", "text": "<strong>¥18/月</strong> 或 <strong>¥66/永久</strong>"}, {"type": "list", "items": ["🐹 仓鼠窝（资源总群）", "🐹 仓鼠窝备份群", "不限量 · 不限速 · 不限转发", "🪙 积分签到系统"]}, {"type": "text", "text": "<em>💡 适合：想高效获取每日更新的普通爱好者</em>"}, {"type": "heading", "text": "🚀 高级成员", "level": 4}, {"type": "text", "text": "<strong>¥288/永久</strong>"}, {"type": "text", "text": "包含初级全部权益，额外解锁："}, {"type": "list", "items": ["👑 <strong>大佬群</strong>（投稿 · 自购 · 许愿 · 定制 — 精选内容）", "📢 <strong>订阅频道</strong> — 新资源通知", "🥵 <strong>糖心LVOG</strong> — 惊喜涩涩频道（更多福利频道开发中）", "🛠 <strong>配套工具</strong> — V5Mesh · ExifCleaner · PaPulse"]}, {"type": "text", "text": "<em>💡 适合：想要独家内容和深度参与的爱好者</em>"}, {"type": "heading", "text": "🪙 三、积分系统", "level": 4}, {"type": "text", "text": "每天在 <a href=\"https://t.me/GuiYaoBot\" target=\"_blank\">@GuiYaoBot</a> 签到赚积分。积分能做的事，比你想的多得多。"}, {"type": "heading", "text": "📥 每日签到", "level": 4}, {"type": "text", "text": "每天点一次 → 积分到手 | 连续签到天数越长，奖励越多"}, {"type": "heading", "text": "🎯 积分兑换表", "level": 4}, {"type": "blockquote", "text": "🔐 VPN — 1 个月 VPN = <strong>600</strong> 积分"}, {"type": "blockquote", "text": "🏠 内群 / 备份群永久 = <strong>2,088</strong> 积分"}, {"type": "blockquote", "text": "🏠 高级社群 1 年 = <strong>36,500</strong> 积分"}, {"type": "blockquote", "text": "🎫 季度会员 = <strong>9,998</strong> 积分 · 年度会员 = <strong>19,888</strong> 积分"}, {"type": "heading", "text": "💫 许愿卡", "level": 4}, {"type": "text", "text": "积分兑换 <strong>许愿卡</strong>，指定你想要的资源包 → 社群采购 → 专属内容。"}, {"type": "text", "text": "<strong>3,000 积分起兑</strong>。<br>积分越高，采购额度越高：<br>上限 <strong>10,000 积分 = ¥1,000 资源包</strong>"}, {"type": "text", "text": "<em>⚠️ 若许愿资源 1 个月内未公开流出，不会在普通社群发布。专属资源仅限兑换用户使用。</em>"}, {"type": "heading", "text": "🤝 积分拼团", "level": 4}, {"type": "list", "items": ["5 人起拼", "10,000 积分 = ¥100 价值", "发起人负责采购", "拼团成功 → 全员拿到资源"]}, {"type": "heading", "text": "💳 兑换方式", "level": 4}, {"type": "text", "text": "把对应积分赠送给管理员：<br><a href=\"https://t.me/DiDumi\" target=\"_blank\">@DiDumi</a><br>管理员确认后尽快处理 ✅"}, {"type": "heading", "text": "🛠 四、配套工具", "level": 4}, {"type": "text", "text": "<strong>1️⃣ V5Mesh — 矩阵分发机器人</strong><br>一次内容，AI 优化后同步多频道，降低重复内容风控。<br>→ <a href=\"https://t.me/V5MeshBot\" target=\"_blank\">@V5MeshBot</a> | 社群内 <strong>永久免费</strong>"}, {"type": "text", "text": "<strong>2️⃣ ExifCleaner_COSV5 — 元数据清理工具</strong><br>相比原版改进：<br>✅ 清理只读属性文件的元数据<br>✅ 递归清理子目录<br>✅ 自定义修改 EXIF 元数据<br>✅ 批量重命名文件<br>🔒 提高二次污染成本"}, {"type": "text", "text": "<strong>3️⃣ PaPulse — 频道活跃度分析</strong><br>→ <a href=\"https://t.me/PaPulseBot\" target=\"_blank\">@PaPulseBot</a>"}, {"type": "heading", "text": "❓ 五、常见问题", "level": 4}, {"type": "text", "text": "<strong>Q：为什么要付费？</strong><br>免费的社群往往难以长期维持——会因为恶意举报导致封号封群，资源一夜归零。<br>付费的本质是为了<strong>维持稳定</strong>——让我们有能力承担封号损失、维护备份体系、持续采购资源。你支付的每一分钱，都在为社群的长期存续做贡献。<br>同时你也买到了<strong>效率</strong>——不用自己翻几十个站，我们替你把关整理，链接长期有效。"}, {"type": "text", "text": "<strong>Q：点「社群下载」没权限？</strong><br>那是群内文件链接，进群就能访问。<br>建议流程：👀 <strong>预览</strong> → 💡 <strong>了解社群</strong> → 💫 <strong>加入社群</strong>"}, {"type": "text", "text": "<strong>Q：资源质量怎么样？</strong><br>🐹 仓鼠窝：量大类全，覆盖多家付费站<br>👑 大佬群：投稿 · 自购 · 许愿 · 定制，品质更精"}, {"type": "text", "text": "<strong>Q：怎么知道值不值？</strong><br>先看频道帖子里的 👀预览，满意再决定。"}, {"type": "heading", "text": "📢 六、失联召回", "level": 4}, {"type": "text", "text": "Telegram 频道偶尔会被封，但我们有预案。"}, {"type": "list", "items": ["<strong>看本页面</strong> — 我会更新最新阵地", "<strong>检查备用频道</strong> — <a href=\"https://t.me/COSV5_COM\" target=\"_blank\">@COSV5_COM</a> / <a href=\"https://t.me/COSV5\" target=\"_blank\">@COSV5</a> / <a href=\"https://t.me/COSV5_VIP\" target=\"_blank\">@COSV5_VIP</a>", "<strong>联系客服</strong> — <a href=\"https://t.me/COSV5CSR_Bot\" target=\"_blank\">@COSV5CSR_Bot</a>"]}, {"type": "text", "text": "<strong>💡 收藏本页面，不管发生什么都能找回组织。</strong><br>封得住频道，封不住内容。"}, {"type": "heading", "text": "💬 联系我们", "level": 4}, {"type": "text", "text": "加入社群 → <a href=\"https://t.me/V5joinBot\" target=\"_blank\">@V5joinBot</a><br>联系客服 → <a href=\"https://t.me/COSV5CSR_Bot\" target=\"_blank\">@COSV5CSR_Bot</a>"}]}};
+
+    (function() {
+      var container = document.getElementById('resourceList');
+      if (!container) return;
+      var data = RESOURCE_DATA;
+      if (!data.recent || data.recent.length === 0) {
+        container.innerHTML = '<div class="empty-state">📭 No resources yet.</div>';
+        return;
+      }
+      var html = '<div class="resource-items">';
+      data.recent.forEach(function(item, i) {
+        var link = item.link || '';
+        html += '<div class="resource-item">';
+        html += '<span class="resource-num">' + (i + 1) + '</span>';
+        if (link) {
+          html += '<a href="' + link + '" target="_blank" rel="noopener" class="resource-link">' + item.title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</a>';
+        } else {
+          html += '<span class="resource-title">' + item.title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</span>';
+        }
+        html += '</div>';
+      });
+      html += '</div>';
+      html += '<div class="resource-meta">🔄 Updated ' + data.updated + ' · ' + data.recent.length + ' items</div>';
+      container.innerHTML = html;
+    })();
+
+    (function() {
+      var container = document.getElementById('guideContent');
+      if (!container) return;
+      var zh = GUIDE_DATA.zh;
+      var html = '';
+      zh.sections.forEach(function(s) {
+        switch (s.type) {
+          case 'heading':
+            if (s.level === 3) html += '<h3>' + s.text + '</h3>';
+            else html += '<h4>' + s.text + '</h4>';
+            break;
+          case 'text': html += '<p>' + s.text + '</p>'; break;
+          case 'image': html += '<img src="' + s.src + '" style="max-width:100%;border-radius:12px;margin:1rem 0">'; break;
+          case 'hr': html += '<hr>'; break;
+          case 'blockquote': html += '<blockquote>' + s.text + '</blockquote>'; break;
+          case 'list':
+            html += '<ul>';
+            s.items.forEach(function(item) { html += '<li>' + item + '</li>'; });
+            html += '</ul>';
+            break;
+        }
+      });
+      container.innerHTML = html;
+    })();
+  </script>
+</body>
+</html>
