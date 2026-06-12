@@ -30,3 +30,4 @@ npx serve .
 ## 自定义域名（可选）
 
 在 Pages 项目的「自定义域」中绑定你的域名（CNAME 到 pages.dev 地址）。
+# force redeploy Fri Jun 12 23:11:57 CST 2026
