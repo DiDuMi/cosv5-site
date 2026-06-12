@@ -23,7 +23,7 @@ const I18N = {
     },
     about: {
       title: 'Our Story',
-      desc: 'Founded <b>May 1, 2024</b> as \'Coser Gallery\'. The founder sold two physical stores and holds lifetime memberships of hundreds of paid websites. Forum moderator of multiple communities.<br><br>Through bans and rebuilds — today: 100+ channel matrix, points ecosystem, custom tools. From Coser Gallery to COSV5, the name changed but the mission didn\'t.',
+      desc: 'Founded <b>May 1, 2024</b> as \'Coser Gallery\'. <br><br>Through bans and rebuilds — today: 100+ channel matrix, points ecosystem, custom tools. From Coser Gallery to COSV5, the name changed but the mission didn\'t.',
     },
     stats: {
       members: 'Community Members',
@@ -175,7 +175,7 @@ const I18N = {
     },
     about: {
       title: '我们的故事',
-      desc: '<b>2024年5月1日</b>以「Coser展馆」创立。创始人为投入社群建设，处理了两家实体店，站长持有上百个付费网站的终身会员，多个论坛版主。<br><br>走过低谷、走过封禁，走到今天——100+ 频道矩阵 · 积分生态 · 自研工具。从Coser展馆到COSV5，名字在变，初心没变。',
+      desc: '<b>2024年5月1日</b>以「Coser展馆」创立。<br><br>走过低谷、走过封禁，走到今天——100+ 频道矩阵 · 积分生态 · 自研工具。从Coser展馆到COSV5，名字在变，初心没变。',
     },
     stats: {
       members: '社群成员',
