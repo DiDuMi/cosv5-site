@@ -4,6 +4,7 @@ const I18N = {
   en: {
     nav: {
       about: 'About',
+      resources: 'Resources',
       timeline: 'History',
       channels: 'Channels',
       features: 'Features',
@@ -117,6 +118,28 @@ const I18N = {
     footer: {
       tagline: 'Cosplay · Community · Sharing',
     },
+    resources: {
+      title: '📌 Resources',
+      desc: 'Selective premium collections — preview at @COSV5_VIP, full access with membership.',
+      updated: 'Updated',
+      items: 'items',
+      loading: '📡 Loading...',
+      empty: '📭 No resources yet.',
+      guide_title: '📖 Community Guide',
+      guide_desc: 'Everything you need to know about COSV5.',
+      back: '← Back to Home',
+    },
+    resources: {
+      title: '📌 近期精选',
+      desc: '精选付费流出资源合集 — 点击预览即可在 @COSV5_VIP 查看，加入社群获取全部。',
+      updated: '更新于',
+      items: '条',
+      loading: '📡 加载中...',
+      empty: '📭 暂无资源',
+      guide_title: '📖 社群指南',
+      guide_desc: '关于 COSV5，你想知道的一切。',
+      back: '← 返回首页',
+    },
     section: {
       about: "ABOUT",
       philosophy: "PHILOSOPHY",
@@ -133,6 +156,7 @@ const I18N = {
   zh: {
     nav: {
       about: '关于',
+      resources: '资源',
       timeline: '历程',
       channels: '频道',
       features: '特色',
@@ -245,6 +269,17 @@ const I18N = {
     },
     footer: {
       tagline: 'Cosplay · 社群 · 分享',
+    },
+    resources: {
+      title: '📌 Resources',
+      desc: 'Selective premium collections — preview at @COSV5_VIP, full access with membership.',
+      updated: 'Updated',
+      items: 'items',
+      loading: '📡 Loading...',
+      empty: '📭 No resources yet.',
+      guide_title: '📖 Community Guide',
+      guide_desc: 'Everything you need to know about COSV5.',
+      back: '← Back to Home',
     },
     section: {
       about: "关于",
