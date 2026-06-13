@@ -1,0 +1,2 @@
+# Serve resources.html at /resources
+/resources /resources.html 200
